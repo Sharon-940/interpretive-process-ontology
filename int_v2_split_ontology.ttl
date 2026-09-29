@@ -1,0 +1,437 @@
+@prefix : <http://www.semanticweb.org/int_r1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/int_r1/> .
+
+<http://www.semanticweb.org/int_r1> rdf:type owl:Ontology ;
+                                     rdfs:comment "\"Interpretive Process Ontology\" is designed to represent the interpretive processes through which interpreters construct an interpretation, taking into account its evolutionary nature. Rather than representing only the final outcomes of interpretation, the ontology allows to model the dynamic process through which meaning is progressively constructed, including the identification of anomalies that trigger sensemaking, the collection of fragmentary clues (evidence), the formulation of observations, questions, hypotheses, temporary conclusions, and the branching evolution of multiple interpretive processes."@en ,
+                                                  "L\"Ontologia del Processo Interpretativo\" è stata concepita per rappresentare i processi interpretativi attraverso i quali gli interpreti costruiscono un'interpretazione, tenendo conto della sua natura evolutiva. Piuttosto che rappresentare solo i risultati finali dell'interpretazione, l'ontologia permette di modellare il processo dinamico attraverso il quale il significato viene progressivamente costruito, includendo l'identificazione di anomalie che innescano la costruzione di significato, la raccolta di indizi frammentari (evidenze), la formulazione di osservazioni, domande, ipotesi, conclusioni provvisorie e l'evoluzione ramificata di molteplici processi interpretativi."@it ;
+                                     rdfs:label "Interpretive Process Ontology"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/terms/identifier
+<http://purl.org/dc/terms/identifier> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/int_r1/hadInterpreter
+:hadInterpreter rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasAssociatedWith> ;
+                owl:inverseOf :wasInterpreterOf ;
+                rdfs:domain :InterpretiveProcess ;
+                rdfs:range :Interpreter .
+
+
+###  http://www.semanticweb.org/int_r1/hadInterpretiveInterest
+:hadInterpretiveInterest rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasInfluencedBy> ;
+                         owl:inverseOf :wasInterpretiveInterestOf ;
+                         rdfs:domain :Interpreter ;
+                         rdfs:range :InterpretiveTopicOfInterest .
+
+
+###  http://www.semanticweb.org/int_r1/included
+:included rdf:type owl:ObjectProperty ;
+          owl:inverseOf :wasIncluded .
+
+
+###  http://www.semanticweb.org/int_r1/includedActivity
+:includedActivity rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :included ;
+                  owl:inverseOf :wasActivityOf ;
+                  rdfs:domain :InterpretiveProcess ,
+                              :InterpretiveSubprocess ;
+                  rdfs:range :InterpretiveActivity .
+
+
+###  http://www.semanticweb.org/int_r1/includedSubprocess
+:includedSubprocess rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf :included ;
+                    owl:inverseOf :wasSubprocessOf ;
+                    rdfs:domain :InterpretiveProcess ;
+                    rdfs:range :InterpretiveSubprocess .
+
+
+###  http://www.semanticweb.org/int_r1/interpreted
+:interpreted rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf <http://www.w3.org/ns/prov#used> ;
+             owl:inverseOf :wasInterpretedBy ;
+             rdfs:domain :InterpretiveProcess ;
+             rdfs:range :InterpretiveEntity ;
+             rdfs:comment "Mette in relazione un'attività interpretativa che è essa stessa una forma di processo interpretativo, con l'entità che ne costituisce l'oggetto di interpretazione. L'entità interpretata può essere una fonte o un prodotto interpretativo (ad esempio, un'osservazione interpretativa o una conclusione interpretativa temporanea) generato anche da un altro storico durante un precedente processo interpretativo."@it ,
+                          "Relates an interpretive activity, which is an interpretive process, to the entity that constitutes its object of interpretation. The interpreted entity may be either a source or an interpretive product (e.g., an interpretive observation or a temporary interpretive conclusion) generated by another historian during a previous interpretive process."@en .
+
+
+###  http://www.semanticweb.org/int_r1/produced
+:produced rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf <http://www.w3.org/ns/prov#generated> ;
+          owl:inverseOf :wasProducedBy ;
+          rdfs:domain :InterpretiveActivity ,
+                      :InterpretiveProcess ,
+                      :InterpretiveSubprocess ;
+          rdfs:range :InterpretiveProcessProduct .
+
+
+###  http://www.semanticweb.org/int_r1/wasActivityOf
+:wasActivityOf rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf :wasIncluded .
+
+
+###  http://www.semanticweb.org/int_r1/wasIncluded
+:wasIncluded rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/int_r1/wasInterpretedBy
+:wasInterpretedBy rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasUsedBy> ;
+                  rdfs:domain :InterpretiveEntity ;
+                  rdfs:range :InterpretiveProcess .
+
+
+###  http://www.semanticweb.org/int_r1/wasInterpreterOf
+:wasInterpreterOf rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasAssociatedFor> .
+
+
+###  http://www.semanticweb.org/int_r1/wasInterpretiveInterestOf
+:wasInterpretiveInterestOf rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf <http://www.w3.org/ns/prov#influenced> ;
+                           rdfs:domain :InterpretiveTopicOfInterest ;
+                           rdfs:range :Interpreter .
+
+
+###  http://www.semanticweb.org/int_r1/wasProducedBy
+:wasProducedBy rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasGeneratedBy> .
+
+
+###  http://www.semanticweb.org/int_r1/wasSubprocessOf
+:wasSubprocessOf rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :wasIncluded .
+
+
+###  http://www.w3.org/ns/prov#Started
+<http://www.w3.org/ns/prov#Started> rdf:type owl:ObjectProperty ;
+                                    rdfs:subPropertyOf <http://www.w3.org/ns/prov#influenced> ;
+                                    owl:inverseOf <http://www.w3.org/ns/prov#wasStartedBy> .
+
+
+###  http://www.w3.org/ns/prov#generated
+<http://www.w3.org/ns/prov#generated> rdf:type owl:ObjectProperty ;
+                                      rdfs:subPropertyOf <http://www.w3.org/ns/prov#influenced> ;
+                                      owl:inverseOf <http://www.w3.org/ns/prov#wasGeneratedBy> ;
+                                      rdfs:domain <http://www.w3.org/ns/prov#Activity> ;
+                                      rdfs:range <http://www.w3.org/ns/prov#Entity> .
+
+
+###  http://www.w3.org/ns/prov#hadDerivation
+<http://www.w3.org/ns/prov#hadDerivation> rdf:type owl:ObjectProperty ;
+                                          rdfs:subPropertyOf <http://www.w3.org/ns/prov#influenced> ;
+                                          owl:inverseOf <http://www.w3.org/ns/prov#wasDerivedFrom> ;
+                                          rdfs:domain <http://www.w3.org/ns/prov#Entity> ;
+                                          rdfs:range <http://www.w3.org/ns/prov#Entity> .
+
+
+###  http://www.w3.org/ns/prov#influenced
+<http://www.w3.org/ns/prov#influenced> rdf:type owl:ObjectProperty ;
+                                       owl:inverseOf <http://www.w3.org/ns/prov#wasInfluencedBy> .
+
+
+###  http://www.w3.org/ns/prov#used
+<http://www.w3.org/ns/prov#used> rdf:type owl:ObjectProperty ;
+                                 rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasInfluencedBy> ;
+                                 owl:inverseOf <http://www.w3.org/ns/prov#wasUsedBy> ;
+                                 rdfs:domain <http://www.w3.org/ns/prov#Activity> ;
+                                 rdfs:range <http://www.w3.org/ns/prov#Entity> ;
+                                 rdfs:comment "L'utilizzo rappresenta l'inizio dell'impiego di un'entità da parte di un'attività. Prima dell'utilizzo, l'attività non aveva ancora iniziato a utilizzare tale entità e non poteva esserne influenzata."@it ,
+                                              "Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity."@en .
+
+
+###  http://www.w3.org/ns/prov#wasAssociatedFor
+<http://www.w3.org/ns/prov#wasAssociatedFor> rdf:type owl:ObjectProperty ;
+                                             owl:inverseOf <http://www.w3.org/ns/prov#wasAssociatedWith> .
+
+
+###  http://www.w3.org/ns/prov#wasAssociatedWith
+<http://www.w3.org/ns/prov#wasAssociatedWith> rdf:type owl:ObjectProperty ;
+                                              rdfs:domain <http://www.w3.org/ns/prov#Activity> ;
+                                              rdfs:range <http://www.w3.org/ns/prov#Agent> .
+
+
+###  http://www.w3.org/ns/prov#wasDerivedFrom
+<http://www.w3.org/ns/prov#wasDerivedFrom> rdf:type owl:ObjectProperty ;
+                                           rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasInfluencedBy> ;
+                                           rdfs:domain <http://www.w3.org/ns/prov#Entity> ;
+                                           rdfs:range <http://www.w3.org/ns/prov#Entity> .
+
+
+###  http://www.w3.org/ns/prov#wasGeneratedBy
+<http://www.w3.org/ns/prov#wasGeneratedBy> rdf:type owl:ObjectProperty ;
+                                           rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasInfluencedBy> ;
+                                           rdfs:domain <http://www.w3.org/ns/prov#Entity> ;
+                                           rdfs:range <http://www.w3.org/ns/prov#Activity> .
+
+
+###  http://www.w3.org/ns/prov#wasInfluencedBy
+<http://www.w3.org/ns/prov#wasInfluencedBy> rdf:type owl:ObjectProperty ;
+                                            rdfs:domain <http://www.w3.org/ns/prov#Activity> ,
+                                                        <http://www.w3.org/ns/prov#Agent> ,
+                                                        <http://www.w3.org/ns/prov#Entity> ;
+                                            rdfs:range <http://www.w3.org/ns/prov#Activity> ,
+                                                       <http://www.w3.org/ns/prov#Agent> ,
+                                                       <http://www.w3.org/ns/prov#Entity> ;
+                                            rdfs:comment "proprietà che lega un diversi processi interpretativi che si influenzano generati anche dalla stessa persona. Quando uno storico ha prodotto una ricerca quindi un processo interpretativo e genera a partire da questo processo un altro processo interpretativo che anche su oggetti di ricerca sensibilmente diversi. I presupposti di tale nuovo processo interpretativo sono influenzati da quello vecchio (dalle conclusioni)."@it .
+
+
+###  http://www.w3.org/ns/prov#wasStartedBy
+<http://www.w3.org/ns/prov#wasStartedBy> rdf:type owl:ObjectProperty ;
+                                         rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasInfluencedBy> ;
+                                         rdfs:domain <http://www.w3.org/ns/prov#Activity> ;
+                                         rdfs:range <http://www.w3.org/ns/prov#Entity> ;
+                                         rdfs:comment "L'inizio si verifica quando un'attività viene considerata avviata da un'entità, detta trigger. L'attività non esisteva prima del suo inizio. Qualsiasi utilizzo, generazione o invalidazione che coinvolga un'attività segue il suo inizio. L'inizio può riferirsi a un'entità trigger che ha attivato l'attività, oppure a un'attività, detta starter, che ha generato il trigger."@it ,
+                                                      "Start is when an activity is deemed to have been started by an entity, known as trigger. The activity did not exist before its start. Any usage, generation, or invalidation involving an activity follows the activity's start. A start may refer to a trigger entity that set off the activity, or to an activity, known as starter, that generated the trigger."@en .
+
+
+###  http://www.w3.org/ns/prov#wasUsedBy
+<http://www.w3.org/ns/prov#wasUsedBy> rdf:type owl:ObjectProperty ;
+                                      rdfs:subPropertyOf <http://www.w3.org/ns/prov#influenced> .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/int_r1/HypothesisStatus
+:HypothesisStatus rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Hypothesis ;
+                  rdfs:range rdfs:Literal .
+
+
+###  http://www.w3.org/ns/prov#startedAtTime
+<http://www.w3.org/ns/prov#startedAtTime> rdf:type owl:DatatypeProperty ;
+                                          rdfs:domain <http://www.w3.org/ns/prov#Activity> ;
+                                          rdfs:range xsd:dateTime .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.cidoc-crm.org/cidoc-crm/E24_Physical_Human-Made_Thing
+<http://www.cidoc-crm.org/cidoc-crm/E24_Physical_Human-Made_Thing> rdf:type owl:Class .
+
+
+###  http://www.cidoc-crm.org/cidoc-crm/E39_Actor
+<http://www.cidoc-crm.org/cidoc-crm/E39_Actor> rdf:type owl:Class .
+
+
+###  http://www.cidoc-crm.org/cidoc-crm/E74_Group
+<http://www.cidoc-crm.org/cidoc-crm/E74_Group> rdf:type owl:Class ;
+                                               rdfs:subClassOf <http://www.cidoc-crm.org/cidoc-crm/E39_Actor> .
+
+
+###  http://www.cidoc-crm.org/cidoc-crm/I2_Belief
+<http://www.cidoc-crm.org/cidoc-crm/I2_Belief> rdf:type owl:Class ;
+                                               owl:equivalentClass :TemporaryInterpretiveConclusion ;
+                                               rdfs:subClassOf :InterpretiveProcessProduct .
+
+
+###  http://www.cidoc-crm.org/extensions/crmtex/TX1_Written_Text
+<http://www.cidoc-crm.org/extensions/crmtex/TX1_Written_Text> rdf:type owl:Class ;
+                                                              rdfs:subClassOf <http://www.cidoc-crm.org/cidoc-crm/E24_Physical_Human-Made_Thing> .
+
+
+###  http://www.cidoc-crm.org/extensions/crmtex/TX7_Written_Text_Segment
+<http://www.cidoc-crm.org/extensions/crmtex/TX7_Written_Text_Segment> rdf:type owl:Class ;
+                                                                      rdfs:subClassOf <http://www.cidoc-crm.org/extensions/crmtex/TX1_Written_Text> .
+
+
+###  http://www.semanticweb.org/int_r1/Anomaly
+:Anomaly rdf:type owl:Class ;
+         rdfs:subClassOf :InterpretiveObservation ;
+         rdfs:comment "An interpretive observation representing an element perceived by an interpreter as unexpected or inconsistent with their background knowledge, expectations, or the current interpretive context."@en ,
+                      "Un'osservazione interpretativa che rappresenta un elemento percepito da un interprete come inatteso o incoerente rispetto alle sue conoscenze pregresse, alle sue aspettative o al contesto interpretativo corrente."@it ;
+         rdfs:label "Anomalia"@it ,
+                    "Anomaly"@en .
+
+
+###  http://www.semanticweb.org/int_r1/ChronologicalVerificationActivity
+:ChronologicalVerificationActivity rdf:type owl:Class ;
+                                   rdfs:subClassOf :InterpretiveActivity ;
+                                   rdfs:comment "An interpretive activity consisting of the comparison of dates or chronological sequences in order to identify temporal relationships relevant to the ongoing interpretive process."@en ,
+                                                "Un'attività interpretativa consistente nel confronto di date o sequenze cronologiche al fine di individuare relazioni temporali rilevanti per il processo interpretativo in corso."@it ;
+                                   rdfs:label "Attività di verifica cronologica"@it ,
+                                              "Chronological Verification Activity"@en .
+
+
+###  http://www.semanticweb.org/int_r1/CloseReadingActivity
+:CloseReadingActivity rdf:type owl:Class ;
+                      rdfs:subClassOf :InterpretiveActivity ;
+                      rdfs:comment "An interpretive activity consisting of the detailed examination of one or more interpretive sources or other interpretive objects in order to identify relevant information for the ongoing interpretive process."@en ,
+                                   "Un'attività interpretativa consistente nell'esame approfondito di una o più fonti interpretative o altri oggetti interpretativi al fine di individuare informazioni rilevanti per il processo interpretativo in corso."@it ;
+                      rdfs:label "Attività di lettura ravvicinata"@it ,
+                                 "Close Reading Activity"@en .
+
+
+###  http://www.semanticweb.org/int_r1/CorrelationActivity
+:CorrelationActivity rdf:type owl:Class ;
+                     rdfs:subClassOf :InterpretiveActivity ;
+                     rdfs:comment "An interpretive activity consisting of the comparison and correlation of two or more interpretive objects or interpretive products in order to identify meaningful relationships relevant to the ongoing interpretive process."@en ,
+                                  "Attività interpretativa consistente nel confronto e nella correlazione di due o più oggetti interpretativi o prodotti interpretativi al fine di individuare relazioni significative rilevanti per il processo interpretativo in corso."@it ;
+                     rdfs:label "Attività di correlazione"@it ,
+                                "Correlation Activity"@en .
+
+
+###  http://www.semanticweb.org/int_r1/Evidence
+:Evidence rdf:type owl:Class ;
+          rdfs:subClassOf :InterpretiveProcessProduct ;
+          rdfs:comment "An interpretive process product representing an element intentionally identified by an interpreter as relevant within one or more sources for the interpretive process being carried out. Unlike a textual fragment or another source segment, an evidence is already the result of an initial interpretive selection rather than a simple extraction from the source. It may emerge from the interpretation and synthesis of one or more textual passages, one or more sources, or both. An evidence represents a clue considered meaningful for the ongoing interpretive process and may subsequently support the formulation, revision, or evaluation of observations, questions, hypotheses, and temporary conclusions. It is therefore not intended as scientific proof, but as a clue in the sense proposed by Carlo Ginzburg."@en ,
+                       "Un prodotto del processo interpretativo che rappresenta un elemento intenzionalmente individuato da un interprete come rilevante all'interno di una o più fonti per il processo interpretativo in corso. A differenza di un frammento testuale o di un altro segmento della fonte, un'evidenza è già il risultato di una prima selezione interpretativa e non una semplice estrazione dalla fonte. Può emergere dall'interpretazione e dalla sintesi di uno o più passaggi testuali, di una o più fonti, oppure dalla loro combinazione. L'evidenza rappresenta un indizio ritenuto significativo per il processo interpretativo in corso e può successivamente contribuire alla formulazione, revisione o valutazione di osservazioni, domande interpretative, ipotesi e conclusioni provvisorie. Non costituisce quindi una prova scientifica, bensì un indizio nel senso proposto da Carlo Ginzburg."@it ;
+          rdfs:label "Evidence"@en ,
+                     "Evidenza"@it .
+
+
+###  http://www.semanticweb.org/int_r1/FocalInterpretiveObject
+:FocalInterpretiveObject rdf:type owl:Class ;
+                         rdfs:subClassOf :InterpretiveObject ;
+                         rdfs:comment "L'oggetto principale di un processo interpretativo, che lo motiva e ne costituisce il fulcro. Rappresenta il fenomeno, l'artefatto, il concetto, l'evento o qualsiasi altra entità la cui interpretazione guida l'intero processo interpretativo."@it ,
+                                      "The primary object of an interpretive process that motivates and constitutes the focus of the process. It represents the phenomenon, artefact, concept, event, or other entity whose interpretation drives the overall reasoning process."@en ;
+                         rdfs:label "Focal Interpretive Object"@en ,
+                                    "Oggetto interpretativo principale"@it .
+
+
+###  http://www.semanticweb.org/int_r1/Hypothesis
+:Hypothesis rdf:type owl:Class ;
+            rdfs:subClassOf :InterpretiveProcessProduct ;
+            rdfs:comment "An interpretive process product representing a tentative explanation or proposition formulated by an interpreter to explain, relate, or predict one or more interpretive observations or other interpretive products."@en ,
+                         "Un prodotto del processo interpretativo che rappresenta una spiegazione o proposizione provvisoria formulata da un interprete per spiegare, mettere in relazione o prevedere uno o più prodotti interpretativi."@it ;
+            rdfs:label "Hypothesis"@en ,
+                       "Ipotesi"@it .
+
+
+###  http://www.semanticweb.org/int_r1/Interpreter
+:Interpreter rdf:type owl:Class ;
+             rdfs:subClassOf <http://www.w3.org/ns/prov#Agent> ;
+             rdfs:comment "An agent who carries out one or more interpretive processes concerning one or more interpretive objects, producing, revising, or reusing interpretive products such as evidence, observations, questions, and others."@en ,
+                          "Un agente che svolge uno o più processi interpretativi riguardanti uno o più oggetti interpretativi, producendo, rivedendo o riutilizzando prodotti interpretativi quali prove, osservazioni, domande e altro."@it ;
+             rdfs:label "Interprete"@it ,
+                        "Interpreter"@en .
+
+
+###  http://www.semanticweb.org/int_r1/InterpretiveActivity
+:InterpretiveActivity rdf:type owl:Class ;
+                      rdfs:subClassOf <http://www.w3.org/ns/prov#Activity> ;
+                      rdfs:comment "A specific and distinguishable activity carried out by an interpreter within an interpretive process or an interpretive inquiry activity."@en ,
+                                   "Un'attività specifica e distinguibile svolta da un interprete all'interno di un processo interpretativo o di un'attività di indagine interpretativa."@it ;
+                      rdfs:label "Attività interpretativa"@it ,
+                                 "Interpretive Activity"@en .
+
+
+###  http://www.semanticweb.org/int_r1/InterpretiveEntity
+:InterpretiveEntity rdf:type owl:Class ;
+                    rdfs:subClassOf <http://www.w3.org/ns/prov#Entity> ;
+                    rdfs:comment "A superclass representing any entity involved in an interpretive process, either as something being interpreted or as a product generated by an interpretive process."@en ,
+                                 "Superclasse che rappresenta qualsiasi entità coinvolta in un processo interpretativo, sia come elemento oggetto di interpretazione sia come prodotto generato generato da un processo interpretativo."@it ;
+                    rdfs:label "Entità interpretativa"@it ,
+                               "Interpretive Entity"@en .
+
+
+###  http://www.semanticweb.org/int_r1/InterpretiveObject
+:InterpretiveObject rdf:type owl:Class ;
+                    rdfs:subClassOf :InterpretiveEntity ;
+                    rdfs:comment "An entity interpreted during an interpretive process. It may represent either the primary object of interpretation or a source interpreted to investigate that object."@en ,
+                                 "Entità interpretata durante un processo interpretativo. Può rappresentare sia l'oggetto principale dell'interpretazione sia una fonte interpretata per approfondirlo."@it ,
+                                 "Oggetto interpretativo"@it ;
+                    rdfs:label "Interpretive Object"@en .
+
+
+###  http://www.semanticweb.org/int_r1/InterpretiveObservation
+:InterpretiveObservation rdf:type owl:Class ;
+                         rdfs:subClassOf :InterpretiveProcessProduct ;
+                         rdfs:comment "An interpretive process product representing an observation produced by an interpreter. Unlike observations in the scientific sense, interpretive observations are inherently influenced by the interpreter's background knowledge, perspective, and interpretive context."@en ,
+                                      "Un prodotto del processo interpretativo che rappresenta un'osservazione prodotta da un interprete. A differenza delle osservazioni in senso scientifico, le osservazioni interpretative sono intrinsecamente influenzate dalle conoscenze pregresse, dalla prospettiva e dal contesto interpretativo dell'interprete."@it ;
+                         rdfs:label "Interpretive Observation"@en ,
+                                    "Osservazione interpretativa"@it .
+
+
+###  http://www.semanticweb.org/int_r1/InterpretiveProcess
+:InterpretiveProcess rdf:type owl:Class ;
+                     rdfs:subClassOf <http://www.w3.org/ns/prov#Activity> ;
+                     rdfs:comment "An activity representing the overall interpretive process carried out by an interpreter in relation to one or more focal interpretive objects. It may include interpretive activities and interpretive inquiry activities and may produce, revise, or reuse interpretive products."@en ,
+                                  "Un'attività che rappresenta l’intero processo interpretativo svolto da un interprete in relazione a uno o più oggetti interpretativi principali. Può includere attività interpretative e attività di indagine interpretativa e può produrre, revisionare o riutilizzare prodotti interpretativi."@it ;
+                     rdfs:label "Interpretive Process"@en ,
+                                "Processo interpretativo"@it .
+
+
+###  http://www.semanticweb.org/int_r1/InterpretiveProcessProduct
+:InterpretiveProcessProduct rdf:type owl:Class ;
+                            rdfs:subClassOf :InterpretiveEntity ;
+                            rdfs:comment "An entity produced during an interpretive process. Interpretive process products may serve as input for subsequent interpretive activities or new interpretive processes."@it ,
+                                         "Entità prodotta durante un processo interpretativo. I prodotti del processo interpretativo possono costituire l'input di successive attività interpretative o di nuovi processi interpretativi."@it ;
+                            rdfs:label "Interpretive Process Product"@en ,
+                                       "Prodotto del processo interpretativo"@it .
+
+
+###  http://www.semanticweb.org/int_r1/InterpretiveQuestion
+:InterpretiveQuestion rdf:type owl:Class ;
+                      rdfs:subClassOf :InterpretiveProcessProduct .
+
+
+###  http://www.semanticweb.org/int_r1/InterpretiveSubprocess
+:InterpretiveSubprocess rdf:type owl:Class ;
+                        rdfs:subClassOf <http://www.w3.org/ns/prov#Activity> ;
+                        rdfs:comment "An interpretive subprocess forming part of a broader interpretive process. It groups multiple interpretive activities contributing to the exploration of one or more interpretive products whose internal sequence cannot always be clearly distinguished or fully represented."@en ,
+                                     "Un sottoprocesso che costituisce parte di un processo interpretativo più ampio. Raggruppa più attività interpretative che contribuiscono all'esplorazione di uno o più prodotti interpretativi, la cui sequenza interna non può sempre essere chiaramente distinta o pienamente rappresentata."@it ;
+                        rdfs:label "Interpretive Subprocess"@en ,
+                                   "Sottoprocesso interpretativo"@it .
+
+
+###  http://www.semanticweb.org/int_r1/InterpretiveTopicOfInterest
+:InterpretiveTopicOfInterest rdf:type owl:Class ;
+                             rdfs:subClassOf :InterpretiveEntity ;
+                             rdfs:comment "A concept that represents a topic of interest to the interpreter."@en ,
+                                          "Un concetto che rappresenta un argomento di interesse dell'interprete."@it ;
+                             rdfs:label "Interpretive Topic of Interest"@en ,
+                                        "Tema interpretativo di interesse"@it .
+
+
+###  http://www.semanticweb.org/int_r1/Source
+:Source rdf:type owl:Class ;
+        rdfs:subClassOf :InterpretiveObject ;
+        rdfs:comment "An interpretive object interpreted during an interpretive process to investigate a focal interpretive object."@en ,
+                     "L'oggetto interpretativo interpretato durante un processo interpretativo per approfondire un oggetto interpretativo principale."@it ;
+        rdfs:label "Fonte"@it ,
+                   "Source"@en .
+
+
+###  http://www.semanticweb.org/int_r1/TemporaryInterpretiveConclusion
+:TemporaryInterpretiveConclusion rdf:type owl:Class ;
+                                 rdfs:subClassOf :InterpretiveProcessProduct ;
+                                 rdfs:comment "An interpretive process product representing the explanation or the hypothesis currently considered the most plausible on the basis of the available interpretive products. It may be revised, replaced, or reused in subsequent interpretive activities or processes."@en ,
+                                              "Un prodotto del processo interpretativo che rappresenta la spiegazione o l'ipotesi ritenuta, allo stato attuale, la più plausibile sulla base dei prodotti interpretativi disponibili. Può essere revisionata, sostituita o riutilizzata in successive attività o processi interpretativi."@it ;
+                                 rdfs:label "Conclusione interpretativa provvisoria"@it ,
+                                            "Temporary Interpretive Conclusion"@en .
+
+
+###  http://www.w3.org/ns/prov#Activity
+<http://www.w3.org/ns/prov#Activity> rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/prov#Agent
+<http://www.w3.org/ns/prov#Agent> rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/prov#Entity
+<http://www.w3.org/ns/prov#Entity> rdf:type owl:Class .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi

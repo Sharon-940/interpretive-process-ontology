@@ -1,0 +1,1007 @@
+@prefix : <http://www.semanticweb.org/int_r1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/int_r1/> .
+
+<http://www.semanticweb.org/int_r1> rdf:type owl:Ontology ;
+                                     rdfs:comment "\"Interpretive Process Ontology\" is designed to represent the interpretive processes through which interpreters construct an interpretation, taking into account its evolutionary nature. Rather than representing only the final outcomes of interpretation, the ontology allows to model the dynamic process through which meaning is progressively constructed, including the identification of anomalies that trigger sensemaking, the collection of fragmentary clues (evidence), the formulation of observations, questions, hypotheses, temporary conclusions, and the branching evolution of multiple interpretive processes."@en ,
+                                                  "L\"Ontologia del Processo Interpretativo\" è stata concepita per rappresentare i processi interpretativi attraverso i quali gli interpreti costruiscono un'interpretazione, tenendo conto della sua natura evolutiva. Piuttosto che rappresentare solo i risultati finali dell'interpretazione, l'ontologia permette di modellare il processo dinamico attraverso il quale il significato viene progressivamente costruito, includendo l'identificazione di anomalie che innescano la costruzione di significato, la raccolta di indizi frammentari (evidenze), la formulazione di osservazioni, domande, ipotesi, conclusioni provvisorie e l'evoluzione ramificata di molteplici processi interpretativi."@it ;
+                                     rdfs:label "Interpretive Process Ontology"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/terms/identifier
+<http://purl.org/dc/terms/identifier> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/int_r1/hadInterpreter
+:hadInterpreter rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasAssociatedWith> ;
+                owl:inverseOf :wasInterpreterOf ;
+                rdfs:domain :InterpretiveProcess ;
+                rdfs:range :Interpreter .
+
+
+###  http://www.semanticweb.org/int_r1/hadInterpretiveInterest
+:hadInterpretiveInterest rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasInfluencedBy> ;
+                         owl:inverseOf :wasInterpretiveInterestOf ;
+                         rdfs:domain :Interpreter ;
+                         rdfs:range :InterpretiveTopicOfInterest .
+
+
+###  http://www.semanticweb.org/int_r1/included
+:included rdf:type owl:ObjectProperty ;
+          owl:inverseOf :wasIncluded .
+
+
+###  http://www.semanticweb.org/int_r1/includedActivity
+:includedActivity rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :included ;
+                  owl:inverseOf :wasActivityOf ;
+                  rdfs:domain :InterpretiveProcess ,
+                              :InterpretiveSubprocess ;
+                  rdfs:range :InterpretiveActivity .
+
+
+###  http://www.semanticweb.org/int_r1/includedSubprocess
+:includedSubprocess rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf :included ;
+                    owl:inverseOf :wasSubprocessOf ;
+                    rdfs:domain :InterpretiveProcess ;
+                    rdfs:range :InterpretiveSubprocess .
+
+
+###  http://www.semanticweb.org/int_r1/interpreted
+:interpreted rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf <http://www.w3.org/ns/prov#used> ;
+             owl:inverseOf :wasInterpretedBy ;
+             rdfs:domain :InterpretiveProcess ;
+             rdfs:range :InterpretiveEntity ;
+             rdfs:comment "Mette in relazione un'attività interpretativa che è essa stessa una forma di processo interpretativo, con l'entità che ne costituisce l'oggetto di interpretazione. L'entità interpretata può essere una fonte o un prodotto interpretativo (ad esempio, un'osservazione interpretativa o una conclusione interpretativa temporanea) generato anche da un altro storico durante un precedente processo interpretativo."@it ,
+                          "Relates an interpretive activity, which is an interpretive process, to the entity that constitutes its object of interpretation. The interpreted entity may be either a source or an interpretive product (e.g., an interpretive observation or a temporary interpretive conclusion) generated by another historian during a previous interpretive process."@en .
+
+
+###  http://www.semanticweb.org/int_r1/produced
+:produced rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf <http://www.w3.org/ns/prov#generated> ;
+          owl:inverseOf :wasProducedBy ;
+          rdfs:domain :InterpretiveActivity ,
+                      :InterpretiveProcess ,
+                      :InterpretiveSubprocess ;
+          rdfs:range :InterpretiveProcessProduct .
+
+
+###  http://www.semanticweb.org/int_r1/wasActivityOf
+:wasActivityOf rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf :wasIncluded .
+
+
+###  http://www.semanticweb.org/int_r1/wasIncluded
+:wasIncluded rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/int_r1/wasInterpretedBy
+:wasInterpretedBy rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasUsedBy> ;
+                  rdfs:domain :InterpretiveEntity ;
+                  rdfs:range :InterpretiveProcess .
+
+
+###  http://www.semanticweb.org/int_r1/wasInterpreterOf
+:wasInterpreterOf rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasAssociatedFor> .
+
+
+###  http://www.semanticweb.org/int_r1/wasInterpretiveInterestOf
+:wasInterpretiveInterestOf rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf <http://www.w3.org/ns/prov#influenced> ;
+                           rdfs:domain :InterpretiveTopicOfInterest ;
+                           rdfs:range :Interpreter .
+
+
+###  http://www.semanticweb.org/int_r1/wasProducedBy
+:wasProducedBy rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasGeneratedBy> .
+
+
+###  http://www.semanticweb.org/int_r1/wasSubprocessOf
+:wasSubprocessOf rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :wasIncluded .
+
+
+###  http://www.w3.org/ns/prov#Started
+<http://www.w3.org/ns/prov#Started> rdf:type owl:ObjectProperty ;
+                                    rdfs:subPropertyOf <http://www.w3.org/ns/prov#influenced> ;
+                                    owl:inverseOf <http://www.w3.org/ns/prov#wasStartedBy> .
+
+
+###  http://www.w3.org/ns/prov#generated
+<http://www.w3.org/ns/prov#generated> rdf:type owl:ObjectProperty ;
+                                      rdfs:subPropertyOf <http://www.w3.org/ns/prov#influenced> ;
+                                      owl:inverseOf <http://www.w3.org/ns/prov#wasGeneratedBy> ;
+                                      rdfs:domain <http://www.w3.org/ns/prov#Activity> ;
+                                      rdfs:range <http://www.w3.org/ns/prov#Entity> .
+
+
+###  http://www.w3.org/ns/prov#hadDerivation
+<http://www.w3.org/ns/prov#hadDerivation> rdf:type owl:ObjectProperty ;
+                                          rdfs:subPropertyOf <http://www.w3.org/ns/prov#influenced> ;
+                                          owl:inverseOf <http://www.w3.org/ns/prov#wasDerivedFrom> ;
+                                          rdfs:domain <http://www.w3.org/ns/prov#Entity> ;
+                                          rdfs:range <http://www.w3.org/ns/prov#Entity> .
+
+
+###  http://www.w3.org/ns/prov#influenced
+<http://www.w3.org/ns/prov#influenced> rdf:type owl:ObjectProperty ;
+                                       owl:inverseOf <http://www.w3.org/ns/prov#wasInfluencedBy> .
+
+
+###  http://www.w3.org/ns/prov#used
+<http://www.w3.org/ns/prov#used> rdf:type owl:ObjectProperty ;
+                                 rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasInfluencedBy> ;
+                                 owl:inverseOf <http://www.w3.org/ns/prov#wasUsedBy> ;
+                                 rdfs:domain <http://www.w3.org/ns/prov#Activity> ;
+                                 rdfs:range <http://www.w3.org/ns/prov#Entity> ;
+                                 rdfs:comment "L'utilizzo rappresenta l'inizio dell'impiego di un'entità da parte di un'attività. Prima dell'utilizzo, l'attività non aveva ancora iniziato a utilizzare tale entità e non poteva esserne influenzata."@it ,
+                                              "Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity."@en .
+
+
+###  http://www.w3.org/ns/prov#wasAssociatedFor
+<http://www.w3.org/ns/prov#wasAssociatedFor> rdf:type owl:ObjectProperty ;
+                                             owl:inverseOf <http://www.w3.org/ns/prov#wasAssociatedWith> .
+
+
+###  http://www.w3.org/ns/prov#wasAssociatedWith
+<http://www.w3.org/ns/prov#wasAssociatedWith> rdf:type owl:ObjectProperty ;
+                                              rdfs:domain <http://www.w3.org/ns/prov#Activity> ;
+                                              rdfs:range <http://www.w3.org/ns/prov#Agent> .
+
+
+###  http://www.w3.org/ns/prov#wasDerivedFrom
+<http://www.w3.org/ns/prov#wasDerivedFrom> rdf:type owl:ObjectProperty ;
+                                           rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasInfluencedBy> ;
+                                           rdfs:domain <http://www.w3.org/ns/prov#Entity> ;
+                                           rdfs:range <http://www.w3.org/ns/prov#Entity> .
+
+
+###  http://www.w3.org/ns/prov#wasGeneratedBy
+<http://www.w3.org/ns/prov#wasGeneratedBy> rdf:type owl:ObjectProperty ;
+                                           rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasInfluencedBy> ;
+                                           rdfs:domain <http://www.w3.org/ns/prov#Entity> ;
+                                           rdfs:range <http://www.w3.org/ns/prov#Activity> .
+
+
+###  http://www.w3.org/ns/prov#wasInfluencedBy
+<http://www.w3.org/ns/prov#wasInfluencedBy> rdf:type owl:ObjectProperty ;
+                                            rdfs:domain <http://www.w3.org/ns/prov#Activity> ,
+                                                        <http://www.w3.org/ns/prov#Agent> ,
+                                                        <http://www.w3.org/ns/prov#Entity> ;
+                                            rdfs:range <http://www.w3.org/ns/prov#Activity> ,
+                                                       <http://www.w3.org/ns/prov#Agent> ,
+                                                       <http://www.w3.org/ns/prov#Entity> ;
+                                            rdfs:comment "proprietà che lega un diversi processi interpretativi che si influenzano generati anche dalla stessa persona. Quando uno storico ha prodotto una ricerca quindi un processo interpretativo e genera a partire da questo processo un altro processo interpretativo che anche su oggetti di ricerca sensibilmente diversi. I presupposti di tale nuovo processo interpretativo sono influenzati da quello vecchio (dalle conclusioni)."@it .
+
+
+###  http://www.w3.org/ns/prov#wasStartedBy
+<http://www.w3.org/ns/prov#wasStartedBy> rdf:type owl:ObjectProperty ;
+                                         rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasInfluencedBy> ;
+                                         rdfs:domain <http://www.w3.org/ns/prov#Activity> ;
+                                         rdfs:range <http://www.w3.org/ns/prov#Entity> ;
+                                         rdfs:comment "L'inizio si verifica quando un'attività viene considerata avviata da un'entità, detta trigger. L'attività non esisteva prima del suo inizio. Qualsiasi utilizzo, generazione o invalidazione che coinvolga un'attività segue il suo inizio. L'inizio può riferirsi a un'entità trigger che ha attivato l'attività, oppure a un'attività, detta starter, che ha generato il trigger."@it ,
+                                                      "Start is when an activity is deemed to have been started by an entity, known as trigger. The activity did not exist before its start. Any usage, generation, or invalidation involving an activity follows the activity's start. A start may refer to a trigger entity that set off the activity, or to an activity, known as starter, that generated the trigger."@en .
+
+
+###  http://www.w3.org/ns/prov#wasUsedBy
+<http://www.w3.org/ns/prov#wasUsedBy> rdf:type owl:ObjectProperty ;
+                                      rdfs:subPropertyOf <http://www.w3.org/ns/prov#influenced> .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/int_r1/HypothesisStatus
+:HypothesisStatus rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Hypothesis ;
+                  rdfs:range rdfs:Literal .
+
+
+###  http://www.w3.org/ns/prov#startedAtTime
+<http://www.w3.org/ns/prov#startedAtTime> rdf:type owl:DatatypeProperty ;
+                                          rdfs:domain <http://www.w3.org/ns/prov#Activity> ;
+                                          rdfs:range xsd:dateTime .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.cidoc-crm.org/cidoc-crm/E24_Physical_Human-Made_Thing
+<http://www.cidoc-crm.org/cidoc-crm/E24_Physical_Human-Made_Thing> rdf:type owl:Class .
+
+
+###  http://www.cidoc-crm.org/cidoc-crm/E39_Actor
+<http://www.cidoc-crm.org/cidoc-crm/E39_Actor> rdf:type owl:Class .
+
+
+###  http://www.cidoc-crm.org/cidoc-crm/E74_Group
+<http://www.cidoc-crm.org/cidoc-crm/E74_Group> rdf:type owl:Class ;
+                                               rdfs:subClassOf <http://www.cidoc-crm.org/cidoc-crm/E39_Actor> .
+
+
+###  http://www.cidoc-crm.org/cidoc-crm/I2_Belief
+<http://www.cidoc-crm.org/cidoc-crm/I2_Belief> rdf:type owl:Class ;
+                                               owl:equivalentClass :TemporaryInterpretiveConclusion ;
+                                               rdfs:subClassOf :InterpretiveProcessProduct .
+
+
+###  http://www.cidoc-crm.org/extensions/crmtex/TX1_Written_Text
+<http://www.cidoc-crm.org/extensions/crmtex/TX1_Written_Text> rdf:type owl:Class ;
+                                                              rdfs:subClassOf <http://www.cidoc-crm.org/cidoc-crm/E24_Physical_Human-Made_Thing> .
+
+
+###  http://www.cidoc-crm.org/extensions/crmtex/TX7_Written_Text_Segment
+<http://www.cidoc-crm.org/extensions/crmtex/TX7_Written_Text_Segment> rdf:type owl:Class ;
+                                                                      rdfs:subClassOf <http://www.cidoc-crm.org/extensions/crmtex/TX1_Written_Text> .
+
+
+###  http://www.semanticweb.org/int_r1/Anomaly
+:Anomaly rdf:type owl:Class ;
+         rdfs:subClassOf :InterpretiveObservation ;
+         rdfs:comment "An interpretive observation representing an element perceived by an interpreter as unexpected or inconsistent with their background knowledge, expectations, or the current interpretive context."@en ,
+                      "Un'osservazione interpretativa che rappresenta un elemento percepito da un interprete come inatteso o incoerente rispetto alle sue conoscenze pregresse, alle sue aspettative o al contesto interpretativo corrente."@it ;
+         rdfs:label "Anomalia"@it ,
+                    "Anomaly"@en .
+
+
+###  http://www.semanticweb.org/int_r1/ChronologicalVerificationActivity
+:ChronologicalVerificationActivity rdf:type owl:Class ;
+                                   rdfs:subClassOf :InterpretiveActivity ;
+                                   rdfs:comment "An interpretive activity consisting of the comparison of dates or chronological sequences in order to identify temporal relationships relevant to the ongoing interpretive process."@en ,
+                                                "Un'attività interpretativa consistente nel confronto di date o sequenze cronologiche al fine di individuare relazioni temporali rilevanti per il processo interpretativo in corso."@it ;
+                                   rdfs:label "Attività di verifica cronologica"@it ,
+                                              "Chronological Verification Activity"@en .
+
+
+###  http://www.semanticweb.org/int_r1/CloseReadingActivity
+:CloseReadingActivity rdf:type owl:Class ;
+                      rdfs:subClassOf :InterpretiveActivity ;
+                      rdfs:comment "An interpretive activity consisting of the detailed examination of one or more interpretive sources or other interpretive objects in order to identify relevant information for the ongoing interpretive process."@en ,
+                                   "Un'attività interpretativa consistente nell'esame approfondito di una o più fonti interpretative o altri oggetti interpretativi al fine di individuare informazioni rilevanti per il processo interpretativo in corso."@it ;
+                      rdfs:label "Attività di lettura ravvicinata"@it ,
+                                 "Close Reading Activity"@en .
+
+
+###  http://www.semanticweb.org/int_r1/CorrelationActivity
+:CorrelationActivity rdf:type owl:Class ;
+                     rdfs:subClassOf :InterpretiveActivity ;
+                     rdfs:comment "An interpretive activity consisting of the comparison and correlation of two or more interpretive objects or interpretive products in order to identify meaningful relationships relevant to the ongoing interpretive process."@en ,
+                                  "Attività interpretativa consistente nel confronto e nella correlazione di due o più oggetti interpretativi o prodotti interpretativi al fine di individuare relazioni significative rilevanti per il processo interpretativo in corso."@it ;
+                     rdfs:label "Attività di correlazione"@it ,
+                                "Correlation Activity"@en .
+
+
+###  http://www.semanticweb.org/int_r1/Evidence
+:Evidence rdf:type owl:Class ;
+          rdfs:subClassOf :InterpretiveProcessProduct ;
+          rdfs:comment "An interpretive process product representing an element intentionally identified by an interpreter as relevant within one or more sources for the interpretive process being carried out. Unlike a textual fragment or another source segment, an evidence is already the result of an initial interpretive selection rather than a simple extraction from the source. It may emerge from the interpretation and synthesis of one or more textual passages, one or more sources, or both. An evidence represents a clue considered meaningful for the ongoing interpretive process and may subsequently support the formulation, revision, or evaluation of observations, questions, hypotheses, and temporary conclusions. It is therefore not intended as scientific proof, but as a clue in the sense proposed by Carlo Ginzburg."@en ,
+                       "Un prodotto del processo interpretativo che rappresenta un elemento intenzionalmente individuato da un interprete come rilevante all'interno di una o più fonti per il processo interpretativo in corso. A differenza di un frammento testuale o di un altro segmento della fonte, un'evidenza è già il risultato di una prima selezione interpretativa e non una semplice estrazione dalla fonte. Può emergere dall'interpretazione e dalla sintesi di uno o più passaggi testuali, di una o più fonti, oppure dalla loro combinazione. L'evidenza rappresenta un indizio ritenuto significativo per il processo interpretativo in corso e può successivamente contribuire alla formulazione, revisione o valutazione di osservazioni, domande interpretative, ipotesi e conclusioni provvisorie. Non costituisce quindi una prova scientifica, bensì un indizio nel senso proposto da Carlo Ginzburg."@it ;
+          rdfs:label "Evidence"@en ,
+                     "Evidenza"@it .
+
+
+###  http://www.semanticweb.org/int_r1/FocalInterpretiveObject
+:FocalInterpretiveObject rdf:type owl:Class ;
+                         rdfs:subClassOf :InterpretiveObject ;
+                         rdfs:comment "L'oggetto principale di un processo interpretativo, che lo motiva e ne costituisce il fulcro. Rappresenta il fenomeno, l'artefatto, il concetto, l'evento o qualsiasi altra entità la cui interpretazione guida l'intero processo interpretativo."@it ,
+                                      "The primary object of an interpretive process that motivates and constitutes the focus of the process. It represents the phenomenon, artefact, concept, event, or other entity whose interpretation drives the overall reasoning process."@en ;
+                         rdfs:label "Focal Interpretive Object"@en ,
+                                    "Oggetto interpretativo principale"@it .
+
+
+###  http://www.semanticweb.org/int_r1/Hypothesis
+:Hypothesis rdf:type owl:Class ;
+            rdfs:subClassOf :InterpretiveProcessProduct ;
+            rdfs:comment "An interpretive process product representing a tentative explanation or proposition formulated by an interpreter to explain, relate, or predict one or more interpretive observations or other interpretive products."@en ,
+                         "Un prodotto del processo interpretativo che rappresenta una spiegazione o proposizione provvisoria formulata da un interprete per spiegare, mettere in relazione o prevedere uno o più prodotti interpretativi."@it ;
+            rdfs:label "Hypothesis"@en ,
+                       "Ipotesi"@it .
+
+
+###  http://www.semanticweb.org/int_r1/Interpreter
+:Interpreter rdf:type owl:Class ;
+             rdfs:subClassOf <http://www.w3.org/ns/prov#Agent> ;
+             rdfs:comment "An agent who carries out one or more interpretive processes concerning one or more interpretive objects, producing, revising, or reusing interpretive products such as evidence, observations, questions, and others."@en ,
+                          "Un agente che svolge uno o più processi interpretativi riguardanti uno o più oggetti interpretativi, producendo, rivedendo o riutilizzando prodotti interpretativi quali prove, osservazioni, domande e altro."@it ;
+             rdfs:label "Interprete"@it ,
+                        "Interpreter"@en .
+
+
+###  http://www.semanticweb.org/int_r1/InterpretiveActivity
+:InterpretiveActivity rdf:type owl:Class ;
+                      rdfs:subClassOf <http://www.w3.org/ns/prov#Activity> ;
+                      rdfs:comment "A specific and distinguishable activity carried out by an interpreter within an interpretive process or an interpretive inquiry activity."@en ,
+                                   "Un'attività specifica e distinguibile svolta da un interprete all'interno di un processo interpretativo o di un'attività di indagine interpretativa."@it ;
+                      rdfs:label "Attività interpretativa"@it ,
+                                 "Interpretive Activity"@en .
+
+
+###  http://www.semanticweb.org/int_r1/InterpretiveEntity
+:InterpretiveEntity rdf:type owl:Class ;
+                    rdfs:subClassOf <http://www.w3.org/ns/prov#Entity> ;
+                    rdfs:comment "A superclass representing any entity involved in an interpretive process, either as something being interpreted or as a product generated by an interpretive process."@en ,
+                                 "Superclasse che rappresenta qualsiasi entità coinvolta in un processo interpretativo, sia come elemento oggetto di interpretazione sia come prodotto generato generato da un processo interpretativo."@it ;
+                    rdfs:label "Entità interpretativa"@it ,
+                               "Interpretive Entity"@en .
+
+
+###  http://www.semanticweb.org/int_r1/InterpretiveObject
+:InterpretiveObject rdf:type owl:Class ;
+                    rdfs:subClassOf :InterpretiveEntity ;
+                    rdfs:comment "An entity interpreted during an interpretive process. It may represent either the primary object of interpretation or a source interpreted to investigate that object."@en ,
+                                 "Entità interpretata durante un processo interpretativo. Può rappresentare sia l'oggetto principale dell'interpretazione sia una fonte interpretata per approfondirlo."@it ,
+                                 "Oggetto interpretativo"@it ;
+                    rdfs:label "Interpretive Object"@en .
+
+
+###  http://www.semanticweb.org/int_r1/InterpretiveObservation
+:InterpretiveObservation rdf:type owl:Class ;
+                         rdfs:subClassOf :InterpretiveProcessProduct ;
+                         rdfs:comment "An interpretive process product representing an observation produced by an interpreter. Unlike observations in the scientific sense, interpretive observations are inherently influenced by the interpreter's background knowledge, perspective, and interpretive context."@en ,
+                                      "Un prodotto del processo interpretativo che rappresenta un'osservazione prodotta da un interprete. A differenza delle osservazioni in senso scientifico, le osservazioni interpretative sono intrinsecamente influenzate dalle conoscenze pregresse, dalla prospettiva e dal contesto interpretativo dell'interprete."@it ;
+                         rdfs:label "Interpretive Observation"@en ,
+                                    "Osservazione interpretativa"@it .
+
+
+###  http://www.semanticweb.org/int_r1/InterpretiveProcess
+:InterpretiveProcess rdf:type owl:Class ;
+                     rdfs:subClassOf <http://www.w3.org/ns/prov#Activity> ;
+                     rdfs:comment "An activity representing the overall interpretive process carried out by an interpreter in relation to one or more focal interpretive objects. It may include interpretive activities and interpretive inquiry activities and may produce, revise, or reuse interpretive products."@en ,
+                                  "Un'attività che rappresenta l’intero processo interpretativo svolto da un interprete in relazione a uno o più oggetti interpretativi principali. Può includere attività interpretative e attività di indagine interpretativa e può produrre, revisionare o riutilizzare prodotti interpretativi."@it ;
+                     rdfs:label "Interpretive Process"@en ,
+                                "Processo interpretativo"@it .
+
+
+###  http://www.semanticweb.org/int_r1/InterpretiveProcessProduct
+:InterpretiveProcessProduct rdf:type owl:Class ;
+                            rdfs:subClassOf :InterpretiveEntity ;
+                            rdfs:comment "An entity produced during an interpretive process. Interpretive process products may serve as input for subsequent interpretive activities or new interpretive processes."@it ,
+                                         "Entità prodotta durante un processo interpretativo. I prodotti del processo interpretativo possono costituire l'input di successive attività interpretative o di nuovi processi interpretativi."@it ;
+                            rdfs:label "Interpretive Process Product"@en ,
+                                       "Prodotto del processo interpretativo"@it .
+
+
+###  http://www.semanticweb.org/int_r1/InterpretiveQuestion
+:InterpretiveQuestion rdf:type owl:Class ;
+                      rdfs:subClassOf :InterpretiveProcessProduct .
+
+
+###  http://www.semanticweb.org/int_r1/InterpretiveSubprocess
+:InterpretiveSubprocess rdf:type owl:Class ;
+                        rdfs:subClassOf <http://www.w3.org/ns/prov#Activity> ;
+                        rdfs:comment "An interpretive subprocess forming part of a broader interpretive process. It groups multiple interpretive activities contributing to the exploration of one or more interpretive products whose internal sequence cannot always be clearly distinguished or fully represented."@en ,
+                                     "Un sottoprocesso che costituisce parte di un processo interpretativo più ampio. Raggruppa più attività interpretative che contribuiscono all'esplorazione di uno o più prodotti interpretativi, la cui sequenza interna non può sempre essere chiaramente distinta o pienamente rappresentata."@it ;
+                        rdfs:label "Interpretive Subprocess"@en ,
+                                   "Sottoprocesso interpretativo"@it .
+
+
+###  http://www.semanticweb.org/int_r1/InterpretiveTopicOfInterest
+:InterpretiveTopicOfInterest rdf:type owl:Class ;
+                             rdfs:subClassOf :InterpretiveEntity ;
+                             rdfs:comment "A concept that represents a topic of interest to the interpreter."@en ,
+                                          "Un concetto che rappresenta un argomento di interesse dell'interprete."@it ;
+                             rdfs:label "Interpretive Topic of Interest"@en ,
+                                        "Tema interpretativo di interesse"@it .
+
+
+###  http://www.semanticweb.org/int_r1/Source
+:Source rdf:type owl:Class ;
+        rdfs:subClassOf :InterpretiveObject ;
+        rdfs:comment "An interpretive object interpreted during an interpretive process to investigate a focal interpretive object."@en ,
+                     "L'oggetto interpretativo interpretato durante un processo interpretativo per approfondire un oggetto interpretativo principale."@it ;
+        rdfs:label "Fonte"@it ,
+                   "Source"@en .
+
+
+###  http://www.semanticweb.org/int_r1/TemporaryInterpretiveConclusion
+:TemporaryInterpretiveConclusion rdf:type owl:Class ;
+                                 rdfs:subClassOf :InterpretiveProcessProduct ;
+                                 rdfs:comment "An interpretive process product representing the explanation or the hypothesis currently considered the most plausible on the basis of the available interpretive products. It may be revised, replaced, or reused in subsequent interpretive activities or processes."@en ,
+                                              "Un prodotto del processo interpretativo che rappresenta la spiegazione o l'ipotesi ritenuta, allo stato attuale, la più plausibile sulla base dei prodotti interpretativi disponibili. Può essere revisionata, sostituita o riutilizzata in successive attività o processi interpretativi."@it ;
+                                 rdfs:label "Conclusione interpretativa provvisoria"@it ,
+                                            "Temporary Interpretive Conclusion"@en .
+
+
+###  http://www.w3.org/ns/prov#Activity
+<http://www.w3.org/ns/prov#Activity> rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/prov#Agent
+<http://www.w3.org/ns/prov#Agent> rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/prov#Entity
+<http://www.w3.org/ns/prov#Entity> rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/int_r1/b124689c-81dd-4d24-a8c5-44bde5cc4671
+:b124689c-81dd-4d24-a8c5-44bde5cc4671 rdf:type owl:NamedIndividual ;
+                                      <http://www.w3.org/ns/prov#influenced> <http://www.semanticweb.org/int_r1/1134d5d7-1c64-4980-86f2-f5ffeb813079> ;
+                                      rdfs:comment "Previous interpretive process relating to the history of Padua's architecture, which could constitute prior knowledge and could have influenced the interpretation of the First IRE Building"@en ,
+                                                   "Processo interpretativo precedente relativo alla storia dell'architettura di Padova, che potrebbe costituire conoscenza pregressa e potrebbe aver influenzato l'interpretazione del primo Palazzo IRE"@it ;
+                                      rdfs:label "Previous Interpretive Process of Interpreter 2\""@en .
+
+
+###  http://www.semanticweb.org/int_r1/ca5ef0de-192b-4ab1-9bbf-438e10712554
+:ca5ef0de-192b-4ab1-9bbf-438e10712554 rdf:type owl:NamedIndividual ,
+                                               :Evidence ;
+                                      :wasProducedBy <http://www.semanticweb.org/int_r1/058a29a1-b5fb-4d68-bd4a-6ba2a9a60171> ;
+                                      <http://www.w3.org/ns/prov#wasDerivedFrom> <http://www.semanticweb.org/int_r1/978a80b2-0f6f-4e9b-91ea-af87011c2a6e> ;
+                                      rdfs:label "Embedded in a local artistic context"@en .
+
+
+###  http://www.semanticweb.org/int_r1/0c8aae73-b7db-4491-8f20-0296c644ff31
+<http://www.semanticweb.org/int_r1/0c8aae73-b7db-4491-8f20-0296c644ff31> rdf:type owl:NamedIndividual ,
+                                                                                  :Source ;
+                                                                         rdfs:comment "Gruppo di fonti... sarebbe da rappresentare tutti i documenti specifici consultati"@it ,
+                                                                                      "Source 2A"@en ;
+                                                                         rdfs:label "Documents of the Padovan Artistic Family (FAP)"@en .
+
+
+###  http://www.semanticweb.org/int_r1/0f6af344-86b4-4a5c-ba8e-c41f3dba6b81
+<http://www.semanticweb.org/int_r1/0f6af344-86b4-4a5c-ba8e-c41f3dba6b81> rdf:type owl:NamedIndividual ,
+                                                                                  :Evidence ;
+                                                                         <http://www.w3.org/ns/prov#wasDerivedFrom> <http://www.semanticweb.org/int_r1/1a8f54a9-9c0b-43b6-8174-83bdaa5af4d0> ;
+                                                                         rdfs:label """Gli scopi: […] 2. Ravvivare l’interesse e la comprensione del pubblico per l’arte e per i suoi problemi; 3. Promuovere lo studio dei problemi cittadini fondandone la determinazione sulla essenza della loro realtà ideale; 4. Studiare i problemi dell’insegnamento artistico che, per il ns. popolo, non devono essere secondi a quelli della tecnica; 5. Studiare i problemi dell’artigianato e delle scuole artigiane; 6. Difendere le opere d’arte, di storia e di cultura, patrimonio ideale del ns. popolo. […] L’azione:
+[…] Interessare le istituzioni cittadine, gli enti locali, le industrie, i privati ad illustrare nobilitare ed arricchire le loro costruzioni in genere con opere d’arte."""@it ,
+                                                                                    "The goals: […] 2. To revive public interest and understanding of art and its problems; 3. To promote the study of civic problems, basing their determination on the essence of their ideal reality; 4. To study the problems of artistic education, which, for our people, must not be secondary to those of technology; 5. To study the problems of craftsmanship and artisan schools; 6. To defend works of art, history, and culture, the ideal heritage of our people. […] The action: […] To involve civic institutions, local authorities, industries, and private individuals in illustrating, ennobling, and enriching their buildings in general with works of art."@en .
+
+
+###  http://www.semanticweb.org/int_r1/058a29a1-b5fb-4d68-bd4a-6ba2a9a60171
+<http://www.semanticweb.org/int_r1/058a29a1-b5fb-4d68-bd4a-6ba2a9a60171> rdf:type owl:NamedIndividual ,
+                                                                                  :InterpretiveSubprocess ;
+                                                                         <http://www.w3.org/ns/prov#wasStartedBy> :c2935f91-bd85-44cf-8116-43a3df1a3baf ;
+                                                                         rdfs:label "Interpretive subprocess triggered by the observation of the presence of frescoes in the First IRE Building"@en .
+
+
+###  http://www.semanticweb.org/int_r1/0592a2d2-1bb9-4f17-9125-615c39987d8c
+<http://www.semanticweb.org/int_r1/0592a2d2-1bb9-4f17-9125-615c39987d8c> rdf:type owl:NamedIndividual ,
+                                                                                  :Evidence ;
+                                                                         :wasProducedBy <http://www.semanticweb.org/int_r1/058a29a1-b5fb-4d68-bd4a-6ba2a9a60171> ;
+                                                                         <http://www.w3.org/ns/prov#wasDerivedFrom> :dddbd11c-7c3a-481a-b15b-7bc452281de8 ;
+                                                                         rdfs:label "Recurring collaborations between Mansutti and Morato in other projects"@en .
+
+
+###  http://www.semanticweb.org/int_r1/07dca2d9-d1c1-4bc8-b001-d96768b17817
+<http://www.semanticweb.org/int_r1/07dca2d9-d1c1-4bc8-b001-d96768b17817> rdf:type owl:NamedIndividual ,
+                                                                                  :Source ;
+                                                                         <http://purl.org/dc/terms/identifier> "man_-mio_0004_0005_0006_0074"@it ;
+                                                                         rdfs:label "Letter from Francesco Mansutti to Carlo Rossi on Reconstruction"@en ,
+                                                                                    "Lettera di Francesco Mansutti a Carlo Rossi sulla Ricostruzione"@it .
+
+
+###  http://www.semanticweb.org/int_r1/079358ba-5d4d-478f-aed8-9f8d47616b5d
+<http://www.semanticweb.org/int_r1/079358ba-5d4d-478f-aed8-9f8d47616b5d> rdf:type owl:NamedIndividual ,
+                                                                                  :Source ;
+                                                                         <http://www.w3.org/ns/prov#hadDerivation> <http://www.semanticweb.org/int_r1/619b9f46-3471-43e1-a301-c1a950521dfa> ;
+                                                                         <http://purl.org/dc/terms/identifier> "man_-mio_0004_0002_0003_0197"@it .
+
+
+###  http://www.semanticweb.org/int_r1/1a8f54a9-9c0b-43b6-8174-83bdaa5af4d0
+<http://www.semanticweb.org/int_r1/1a8f54a9-9c0b-43b6-8174-83bdaa5af4d0> rdf:type owl:NamedIndividual ,
+                                                                                  :Source ;
+                                                                         <http://purl.org/dc/terms/identifier> "man_-mio_0004_0002_0001_0004"@it ;
+                                                                         rdfs:comment "Statute of the Padovan Artistic Family (FAP) that defines the organisation's objectives and activities, including the promotion of public engagement with art, the protection of cultural heritage, the relationship between art and industry, and the encouragement of integrating artworks into public and private buildings"@en ,
+                                                                                      "Statuto della Famiglia degli Artisti Padovani (FAP) il quale definisce gli scopi e le attività dell'associazione, promuovendo la diffusione della cultura artistica, la tutela del patrimonio storico e artistico, il rapporto tra arte e industria e l'integrazione delle opere d'arte negli edifici pubblici e privati."@it ;
+                                                                         rdfs:label "FAMIGLIA DEGLI ARTISTI PADOVANI: Statuto"@it .
+
+
+###  http://www.semanticweb.org/int_r1/1134d5d7-1c64-4980-86f2-f5ffeb813079
+<http://www.semanticweb.org/int_r1/1134d5d7-1c64-4980-86f2-f5ffeb813079> rdf:type owl:NamedIndividual ,
+                                                                                  :InterpretiveTopicOfInterest ;
+                                                                         :wasInterpretiveInterestOf :ab7daaf1-fff2-4cb8-af57-0d2c0d6e941a ;
+                                                                         rdfs:label "Architectural history of Padua"@en ,
+                                                                                    "Storia dell'architettura di Padova"@it .
+
+
+###  http://www.semanticweb.org/int_r1/145f95b8-6eb4-47b0-98e5-6feaccf9e0c7
+<http://www.semanticweb.org/int_r1/145f95b8-6eb4-47b0-98e5-6feaccf9e0c7> rdf:type owl:NamedIndividual ,
+                                                                                  :TemporaryInterpretiveConclusion ;
+                                                                         <http://www.w3.org/ns/prov#wasDerivedFrom> <http://www.semanticweb.org/int_r1/3030c6fe-52fa-4fc7-b0aa-8eca3a932d41> ,
+                                                                                                                    <http://www.semanticweb.org/int_r1/50494deb-edac-4864-bf69-28ff89c015c3> ;
+                                                                         rdfs:label "Frescoes as intentional conceptual symbolic cultural elements reflectiong the integration of art, architecture and industrialization"@en .
+
+
+###  http://www.semanticweb.org/int_r1/1547e3b2-c0de-4e84-bdb0-f10ee9edda55
+<http://www.semanticweb.org/int_r1/1547e3b2-c0de-4e84-bdb0-f10ee9edda55> rdf:type owl:NamedIndividual ,
+                                                                                  :Anomaly ;
+                                                                         <http://www.w3.org/ns/prov#wasDerivedFrom> <http://www.semanticweb.org/int_r1/66310e30-0c27-4e6f-8af6-50259a651dcb> ,
+                                                                                                                    :fd3c40b1-0c49-4a67-8925-c4243c8df5cd ;
+                                                                         rdfs:label "The presence of frescoes appears unusual in a building associated with industrialized construction practices"@en .
+
+
+###  http://www.semanticweb.org/int_r1/2b8e14c9-8f25-4674-988f-9e58416bff1c
+<http://www.semanticweb.org/int_r1/2b8e14c9-8f25-4674-988f-9e58416bff1c> rdf:type owl:NamedIndividual ,
+                                                                                  <http://www.cidoc-crm.org/extensions/crmtex/TX7_Written_Text_Segment> ,
+                                                                                  :Evidence ;
+                                                                         <http://www.w3.org/ns/prov#wasDerivedFrom> :b21d45b2-208a-4480-a966-4edc31ed03a2 ;
+                                                                         rdfs:label """Al Comune, tutore e regolatore massimo della complessa vita cittadina, spetta il compito di incoraggiare, di stimolare, di promuovere l’edilizia. Non si chiedono, infatti, sovvenzioni di aree ed abbandono di diritti che possano costituire un danno per la proprietà Comunale. Si Chiede in definitiva: 
+- di impiegare nella costruzione un centinaio di operai
+- di dar lavoro ad industriali ed artigiani…"""@it ,
+                                                                                    """The Municipality, the guardian and ultimate regulator of the complex life of the city, is responsible for encouraging, stimulating, and promoting construction. It does not, in fact, ask for land subsidies or the abandonment of rights that could jeopardize municipal property. Ultimately, it is requested:
+- to employ about one hundred workers in the construction
+- to provide jobs for industrialists and artisans..."""@en .
+
+
+###  http://www.semanticweb.org/int_r1/20835984-a28b-4930-bfe9-ecd6a554e9f6
+<http://www.semanticweb.org/int_r1/20835984-a28b-4930-bfe9-ecd6a554e9f6> rdf:type owl:NamedIndividual ,
+                                                                                  :Evidence ;
+                                                                         <http://www.w3.org/ns/prov#wasDerivedFrom> <http://www.semanticweb.org/int_r1/07dca2d9-d1c1-4bc8-b001-d96768b17817> ;
+                                                                         <http://www.w3.org/ns/prov#wasInfluencedBy> <http://www.semanticweb.org/int_r1/9f85f436-643f-4d63-8449-3fb170ea9a3d> ;
+                                                                         rdfs:label """Caro Rossi, […] So che il Sindacato ingegneri di Milano sta
+dibattendo energicamente la questione della ricostruzione: problema arduo e
+delicatissimo che soltanto  una visione assai larga e serena e lungimirante può avviare nel senso giusto senza di che si continuerà a costruire malissimo e ad appestare l’Italia di opere volgari che sono demolitrici di quella educazione spirituale e degli affetti di cui abbiamo tanto bisogno per rialzarci dal fango in cui siamo caduti. Io che deploro e piango sulle terribili demolizioni temo ancor più di queste, le ricostruzioni."""@it ,
+                                                                                    "Dear Rossi, [...] I know that the Milan Engineers' Union is vigorously debating the issue of reconstruction: a difficult and extremely delicate problem that only a very broad, serene, and far-sighted vision can address in the right direction. Otherwise, we will continue to build terribly and plague Italy with vulgar projects that destroy the spiritual education and affection we so desperately need to rise from the mire into which we have fallen. I, who deplore and weep over the terrible demolitions, fear the reconstructions even more than these."@en .
+
+
+###  http://www.semanticweb.org/int_r1/3a54a0cb-ef22-404c-8797-761a42402b38
+<http://www.semanticweb.org/int_r1/3a54a0cb-ef22-404c-8797-761a42402b38> rdf:type owl:NamedIndividual ,
+                                                                                  :InterpretiveObservation ;
+                                                                         <http://www.w3.org/ns/prov#wasDerivedFrom> :f886bac8-426e-47c1-ae08-51bbaa6000e5 ;
+                                                                         rdfs:label "Le attività della FAP sembrano costituire un contesto culturale rilevante per interpretare la presenza e il significato degli affreschi del Primo Palazzo IRE."@it ,
+                                                                                    "The activities of the FAP appear to constitute a relevant cultural context for interpreting the presence and meaning of the frescoes of the First IRE Palace."@en .
+
+
+###  http://www.semanticweb.org/int_r1/3e1e5944-a738-4c44-b59d-57a53cf190ab
+<http://www.semanticweb.org/int_r1/3e1e5944-a738-4c44-b59d-57a53cf190ab> rdf:type owl:NamedIndividual ,
+                                                                                  :CorrelationActivity ;
+                                                                         :interpreted <http://www.semanticweb.org/int_r1/7ce09639-1227-4ac9-a141-01b1c15f38f0> ,
+                                                                                      :cd407ee8-806a-40ea-b066-fd6a3eeed5f3 ;
+                                                                         rdfs:comment "Correlation of interpretive observations derived from Carlo Rossi's book Unification and Mansutti's letter to identify a possible shared broad and forward-looking vision of reconstruction"@en ;
+                                                                         rdfs:label "Correlation of Interpretive Observations from Carlo Rossi's Book and Mansutti's Letter"@en .
+
+
+###  http://www.semanticweb.org/int_r1/3030c6fe-52fa-4fc7-b0aa-8eca3a932d41
+<http://www.semanticweb.org/int_r1/3030c6fe-52fa-4fc7-b0aa-8eca3a932d41> rdf:type owl:NamedIndividual ,
+                                                                                  :Hypothesis ;
+                                                                         <http://www.w3.org/ns/prov#wasDerivedFrom> <http://www.semanticweb.org/int_r1/8f6fc9af-087c-426e-8fc5-746f7221d231> ;
+                                                                         rdfs:label "\"The presence of the frescoes may be consistent with the conception of art promoted by the FAP"@en ,
+                                                                                    "La presenza degli affreschi potrebbe essere coerente con la concezione dell'arte promossa dalla FAP"@it .
+
+
+###  http://www.semanticweb.org/int_r1/32803284-90f2-446b-b661-36d6389c9b51
+<http://www.semanticweb.org/int_r1/32803284-90f2-446b-b661-36d6389c9b51> rdf:type owl:NamedIndividual ,
+                                                                                  :InterpretiveProcess ;
+                                                                         <http://www.w3.org/ns/prov#wasStartedBy> :b8bf9e40-6511-4e00-a050-c93fda412800 ;
+                                                                         rdfs:label "Interpretive process investigating the possible influence of Padua's historic monuments on Mansutti's architectural design"@en .
+
+
+###  http://www.semanticweb.org/int_r1/3728443a-e29d-4990-9efd-60fdfc45bdf4
+<http://www.semanticweb.org/int_r1/3728443a-e29d-4990-9efd-60fdfc45bdf4> rdf:type owl:NamedIndividual ,
+                                                                                  :InterpretiveObservation ;
+                                                                         <http://www.w3.org/ns/prov#wasDerivedFrom> <http://www.semanticweb.org/int_r1/2b8e14c9-8f25-4674-988f-9e58416bff1c> ;
+                                                                         rdfs:label "Il coinvolgimento dei pittori emerge come obiettivo esplicito del progetto di Mansutti."@it ,
+                                                                                    "The involvement of painters emerges as an explicit objective of Mansutti's project"@en .
+
+
+###  http://www.semanticweb.org/int_r1/3817f940-630f-4063-9c65-adb334a3115e
+<http://www.semanticweb.org/int_r1/3817f940-630f-4063-9c65-adb334a3115e> rdf:type owl:NamedIndividual ,
+                                                                                  :Source ;
+                                                                         :wasInterpretedBy :b85dcd02-75cc-463f-89a5-0a8adcd08179 ;
+                                                                         rdfs:comment "Carlo Rossi's book"@en ;
+                                                                         rdfs:label "L'UNIFICAZIONE NELL'INDUSTRIA, NELLA VITA SOCIALE E IN GUERRA"@it .
+
+
+###  http://www.semanticweb.org/int_r1/5a5c969b-ad7f-466f-a643-71b81e2d7803
+<http://www.semanticweb.org/int_r1/5a5c969b-ad7f-466f-a643-71b81e2d7803> rdf:type owl:NamedIndividual ,
+                                                                                  :InterpretiveQuestion ;
+                                                                         <http://www.w3.org/ns/prov#wasDerivedFrom> <http://www.semanticweb.org/int_r1/1547e3b2-c0de-4e84-bdb0-f10ee9edda55> ;
+                                                                         rdfs:label "Why does an industrialized building include traditional elements such as frescoes?"@en .
+
+
+###  http://www.semanticweb.org/int_r1/5d828227-65b5-41b9-bf1c-9dd177f857b0
+<http://www.semanticweb.org/int_r1/5d828227-65b5-41b9-bf1c-9dd177f857b0> rdf:type owl:NamedIndividual ,
+                                                                                  :Hypothesis ;
+                                                                         <http://www.w3.org/ns/prov#wasGeneratedBy> :ca5ef0de-192b-4ab1-9bbf-438e10712554 ,
+                                                                                                                    <http://www.semanticweb.org/int_r1/0592a2d2-1bb9-4f17-9125-615c39987d8c> ,
+                                                                                                                    <http://www.semanticweb.org/int_r1/95b8caf1-af27-4176-bcd8-0b7cf1436891> ;
+                                                                         rdfs:label "Decorative frescoes emerged fom local artistic practices shaped by contemporary regulatory frameworks"@en .
+
+
+###  http://www.semanticweb.org/int_r1/5df618bc-3b81-4534-85cb-e8311c9afa5a
+<http://www.semanticweb.org/int_r1/5df618bc-3b81-4534-85cb-e8311c9afa5a> rdf:type owl:NamedIndividual ,
+                                                                                  :TemporaryInterpretiveConclusion ;
+                                                                         <http://www.w3.org/ns/prov#wasDerivedFrom> <http://www.semanticweb.org/int_r1/5d828227-65b5-41b9-bf1c-9dd177f857b0> ;
+                                                                         rdfs:comment "Gli affreschi come parte di una più ampia tradizione architettonica radicata nelle pratiche artistiche locali e nei quadri normativi del dopoguerra."@it ;
+                                                                         rdfs:label "Frescoes as part of a broader architectural habit rooted in local artistic practices and post-war regulatory frameworks"@en .
+
+
+###  http://www.semanticweb.org/int_r1/5e066aac-571a-4023-b163-7649f63805b3
+<http://www.semanticweb.org/int_r1/5e066aac-571a-4023-b163-7649f63805b3> rdf:type owl:NamedIndividual ,
+                                                                                  :InterpretiveProcess ;
+                                                                         :hadInterpreter :ab7daaf1-fff2-4cb8-af57-0d2c0d6e941a ;
+                                                                         :includedSubprocess <http://www.semanticweb.org/int_r1/058a29a1-b5fb-4d68-bd4a-6ba2a9a60171> ;
+                                                                         :interpreted :fd3c40b1-0c49-4a67-8925-c4243c8df5cd ;
+                                                                         :produced <http://www.semanticweb.org/int_r1/5df618bc-3b81-4534-85cb-e8311c9afa5a> ;
+                                                                         rdfs:label "Interpretive process of Interpreter 2"@en .
+
+
+###  http://www.semanticweb.org/int_r1/50494deb-edac-4864-bf69-28ff89c015c3
+<http://www.semanticweb.org/int_r1/50494deb-edac-4864-bf69-28ff89c015c3> rdf:type owl:NamedIndividual ,
+                                                                                  :Hypothesis ;
+                                                                         <http://www.w3.org/ns/prov#wasDerivedFrom> <http://www.semanticweb.org/int_r1/3e1e5944-a738-4c44-b59d-57a53cf190ab> ,
+                                                                                                                    :cd407ee8-806a-40ea-b066-fd6a3eeed5f3 ;
+                                                                         rdfs:label "Potrebbe emergere l'idea che per Mansutti l'industrializzazione acquisisca valore solo quando è inserita in un progetto culturale più ampio."@it ,
+                                                                                    "The idea might emerge that for Mansutti industrialization acquires value only when inserted into a broader cultural project."@en .
+
+
+###  http://www.semanticweb.org/int_r1/6c3c01bf-4969-4812-a004-79b6c869215f
+<http://www.semanticweb.org/int_r1/6c3c01bf-4969-4812-a004-79b6c869215f> rdf:type owl:NamedIndividual ,
+                                                                                  :Evidence ;
+                                                                         <http://www.w3.org/ns/prov#wasDerivedFrom> <http://www.semanticweb.org/int_r1/1a8f54a9-9c0b-43b6-8174-83bdaa5af4d0> ;
+                                                                         rdfs:label "MORATO ANTONIO [...] GRASSETTO IVONE"@it .
+
+
+###  http://www.semanticweb.org/int_r1/6fb705f0-ee52-48ba-ab39-78ce244ad8eb
+<http://www.semanticweb.org/int_r1/6fb705f0-ee52-48ba-ab39-78ce244ad8eb> rdf:type owl:NamedIndividual ,
+                                                                                  :Evidence ;
+                                                                         rdfs:label "Correspondence between Mansutti and Grassetto highlighting the importance of industrialization within a broader cultural project"@en .
+
+
+###  http://www.semanticweb.org/int_r1/61180188-3c6a-4c6b-8cee-9ff16c9ca568
+<http://www.semanticweb.org/int_r1/61180188-3c6a-4c6b-8cee-9ff16c9ca568> rdf:type owl:NamedIndividual ,
+                                                                                  :InterpretiveQuestion ;
+                                                                         :wasProducedBy :b124689c-81dd-4d24-a8c5-44bde5cc4671 ;
+                                                                         <http://www.w3.org/ns/prov#influenced> :c2935f91-bd85-44cf-8116-43a3df1a3baf ;
+                                                                         <http://www.w3.org/ns/prov#wasDerivedFrom> <http://www.semanticweb.org/int_r1/762cc2cf-1a22-4658-95b8-fbaa3b31dd9a> ;
+                                                                         rdfs:label "Why do similar frescoes recur in multiple postwar buildings in Padua?"@en .
+
+
+###  http://www.semanticweb.org/int_r1/619b9f46-3471-43e1-a301-c1a950521dfa
+<http://www.semanticweb.org/int_r1/619b9f46-3471-43e1-a301-c1a950521dfa> rdf:type owl:NamedIndividual ,
+                                                                                  :Evidence ;
+                                                                         rdfs:label "[…] it is necessary, because it is our duty to let the Paduans know about their city, to let them know that Padua is one of the gems of Italy even if no one knows it, even if many pretend to ignore it and praise, for example, Siena and Perugia and Orvieto, etc., etc., which Padua has absolutely nothing to envy even if it has lost much of that marvelous moment of art that was constituted by the frescoes of the Ovetari Chapel by Mantegna. To the incredulous, I cite only these various and different testimonies: Scrovegni, Gattamelata, Basilica del Santo, Salone [...] And to return to the theme of Paduan modesty, you can get […] to see, for example, that the Salone, known for its unique size but located in the second tier compared to the Palladian Salone, is instead much more grandiose, more lively, more powerful"@en ,
+                                                                                    "[…] è necessario, perché è doveroso far conoscere ai padovani la loro città far loro sapere che Padova è una delle gemme d’Italia anche se nessuno lo sa, anche se molti fingono di ignorarlo e vi esaltano p. es. Siena e Perugia ed Orvieto ecc. ecc. alle quali Padova non ha assolutamente nulla da invidiare anche se ha perso gran parte di quel meraviglioso momento d’arte che era costituito dagli affreschi della Cappella Ovetari del Mantegna. Agli increduli io cito solo queste diverse e differenti testimonianze: Scrovegni, Gattamelata, basilica del Santo, Salone [...] E per tornare al tema della modestia patavina voi potete arrivare […] a vedere p. es. che il Salone, noto sì per la unicità della mole ma collocato nei posti di secondo ordine rispetto al Salone palladiano è invece di tanto più grandioso, più vivo, più potente"@it .
+
+
+###  http://www.semanticweb.org/int_r1/63aaf702-c16f-476f-9884-afa6a5c4d831
+<http://www.semanticweb.org/int_r1/63aaf702-c16f-476f-9884-afa6a5c4d831> rdf:type owl:NamedIndividual ,
+                                                                                  :InterpretiveQuestion ;
+                                                                         <http://www.w3.org/ns/prov#wasDerivedFrom> <http://www.semanticweb.org/int_r1/681d5e6a-bbcc-40fc-98ef-d18b4767ac76> ;
+                                                                         rdfs:label "Esiste una relazione tra questo interesse dichiarato per il patrimonio artistico padovano e la presenza degli affreschi nei palazzi IRE?"@it ,
+                                                                                    "Is there a relationship between this declared interest in Padua's artistic heritage and the presence of frescoes in the IRE buildings?"@en .
+
+
+###  http://www.semanticweb.org/int_r1/6400d3ac-7c71-4c87-8e62-d871918c83d4
+<http://www.semanticweb.org/int_r1/6400d3ac-7c71-4c87-8e62-d871918c83d4> rdf:type owl:NamedIndividual ,
+                                                                                  :Evidence ;
+                                                                         <http://www.w3.org/ns/prov#wasDerivedFrom> <http://www.semanticweb.org/int_r1/3817f940-630f-4063-9c65-adb334a3115e> ;
+                                                                         rdfs:comment "Example illustrating the distinction between an evidence and a textual passage. The evidence does not correspond to a specific text fragment, but to an interpretive construct intentionally identified by the interpreter through the close reading of one or more textual passages. In this example, the concept of \"Unification\" emerges from the interpretation of Carlo Rossi's book as a whole rather than from a single textual passage."@en ;
+                                                                         rdfs:label "Carlo Rossi's concept of Unification"@en ,
+                                                                                    "Il concetto di Unificazione di Carlo Rossi"@it .
+
+
+###  http://www.semanticweb.org/int_r1/66310e30-0c27-4e6f-8af6-50259a651dcb
+<http://www.semanticweb.org/int_r1/66310e30-0c27-4e6f-8af6-50259a651dcb> rdf:type owl:NamedIndividual ,
+                                                                                  :TemporaryInterpretiveConclusion ;
+                                                                         rdfs:label "Il cantiere è concepito come progetto di ricostruzione industrialmente organizzato"@it ,
+                                                                                    "The construction site is conceived as an industrially organised reconstruction project"@en .
+
+
+###  http://www.semanticweb.org/int_r1/664c904d-4745-4a5f-a519-e7493f7c962f
+<http://www.semanticweb.org/int_r1/664c904d-4745-4a5f-a519-e7493f7c962f> rdf:type owl:NamedIndividual ,
+                                                                                  :Source ;
+                                                                         <http://purl.org/dc/terms/identifier> "man_-mio_0004_0002_0001_0002"@it .
+
+
+###  http://www.semanticweb.org/int_r1/681d5e6a-bbcc-40fc-98ef-d18b4767ac76
+<http://www.semanticweb.org/int_r1/681d5e6a-bbcc-40fc-98ef-d18b4767ac76> rdf:type owl:NamedIndividual ,
+                                                                                  :InterpretiveObservation ;
+                                                                         <http://www.w3.org/ns/prov#wasDerivedFrom> <http://www.semanticweb.org/int_r1/619b9f46-3471-43e1-a301-c1a950521dfa> ;
+                                                                         rdfs:label "Mansutti appears to consider these monuments representative of Padua's artistic and cultural identity"@en ,
+                                                                                    "Mansutti sembra considerare questi monumenti rappresentativi dell'identità artistico-culturale di Padova"@it .
+
+
+###  http://www.semanticweb.org/int_r1/69051ecd-9197-417e-9f26-a1070d174b28
+<http://www.semanticweb.org/int_r1/69051ecd-9197-417e-9f26-a1070d174b28> rdf:type owl:NamedIndividual ,
+                                                                                  :InterpretiveProcess ;
+                                                                         :hadInterpreter <http://www.semanticweb.org/int_r1/863db4cb-2fb4-4d69-be93-3d86ed8593d3> ;
+                                                                         :interpreted <http://www.semanticweb.org/int_r1/76bb6e32-d850-4422-b589-a836ba25e456> ,
+                                                                                      :a8bdd863-fc65-417e-ba4f-5966d900ce12 ,
+                                                                                      :b21d45b2-208a-4480-a966-4edc31ed03a2 ;
+                                                                         :produced <http://www.semanticweb.org/int_r1/66310e30-0c27-4e6f-8af6-50259a651dcb> ,
+                                                                                   :d76077bb-16cd-4fe6-b09a-e86f4a731a2a ;
+                                                                         <http://www.w3.org/ns/prov#wasInfluencedBy> <http://www.semanticweb.org/int_r1/8a564405-613b-4db1-8738-e5eb057f44c9> ;
+                                                                         rdfs:comment "Lo studio precedente si è concentrato sulla storia costruttiva dei due edifici IRE, interpretata attraverso la lente del ruolo e della storia della società IRE, autrice di questi progetti."@it ,
+                                                                                      "The previous study focused on the construction history of the two IRE buildings, interpreted through the lens of the role and history of the IRE company, the author of these projects."@en ;
+                                                                         rdfs:label "Il precedente processo interpretativo dell'interprete 1"@it ,
+                                                                                    "The previous interpretive process of Interpreter 1"@en .
+
+
+###  http://www.semanticweb.org/int_r1/7ce09639-1227-4ac9-a141-01b1c15f38f0
+<http://www.semanticweb.org/int_r1/7ce09639-1227-4ac9-a141-01b1c15f38f0> rdf:type owl:NamedIndividual ,
+                                                                                  :InterpretiveObservation ;
+                                                                         <http://www.w3.org/ns/prov#wasDerivedFrom> <http://www.semanticweb.org/int_r1/6400d3ac-7c71-4c87-8e62-d871918c83d4> ;
+                                                                         rdfs:label "Il concetto di Unificazione sembra rappresentare un quadro teorico più ampio della standardizzazione, riflettendo una visione della Ricostruzione più estesa e culturale, che investe non soltanto il mondo fisico, ma la società nel suo complesso."@it ,
+                                                                                    "The concept of Unification appears to represent a broader theoretical framework than standardization, reflecting a more comprehensive vision of Reconstruction that extends beyond the physical realm to encompass society as a whole."@en .
+
+
+###  http://www.semanticweb.org/int_r1/76bb6e32-d850-4422-b589-a836ba25e456
+<http://www.semanticweb.org/int_r1/76bb6e32-d850-4422-b589-a836ba25e456> rdf:type owl:NamedIndividual ,
+                                                                                  :Source ;
+                                                                         <http://purl.org/dc/terms/identifier> "man_-mio_0001_0001_0046"@it ;
+                                                                         rdfs:comment "Collection of documents preserved in the archival folders concerning the IRE buildings and the administrative records of the I.R.E. company."@en ,
+                                                                                      "Insieme dei documenti conservati nei faldoni relativi ai Palazzi IRE e alla documentazione amministrativa della società I.R.E."@it ;
+                                                                         rdfs:label "Archival records of the IRE buildings and the I.R.E. company"@en ,
+                                                                                    "Documentazione archivistica dei Palazzi IRE e della società I.R.E."@it .
+
+
+###  http://www.semanticweb.org/int_r1/762cc2cf-1a22-4658-95b8-fbaa3b31dd9a
+<http://www.semanticweb.org/int_r1/762cc2cf-1a22-4658-95b8-fbaa3b31dd9a> rdf:type owl:NamedIndividual ,
+                                                                                  :InterpretiveObservation ;
+                                                                         :wasProducedBy :b124689c-81dd-4d24-a8c5-44bde5cc4671 ;
+                                                                         rdfs:label "Affreschi decorativi compaiono in alcuni edifici del dopoguerra a Padova"@it ,
+                                                                                    "Decorative frescoes appear in some post-war buildings in Padua"@en .
+
+
+###  http://www.semanticweb.org/int_r1/8a564405-613b-4db1-8738-e5eb057f44c9
+<http://www.semanticweb.org/int_r1/8a564405-613b-4db1-8738-e5eb057f44c9> rdf:type owl:NamedIndividual ,
+                                                                                  :InterpretiveTopicOfInterest ;
+                                                                         :hadInterpretiveInterest <http://www.semanticweb.org/int_r1/8a564405-613b-4db1-8738-e5eb057f44c9> ;
+                                                                         rdfs:label "History of industrialisation of architecture"@en .
+
+
+###  http://www.semanticweb.org/int_r1/8f6fc9af-087c-426e-8fc5-746f7221d231
+<http://www.semanticweb.org/int_r1/8f6fc9af-087c-426e-8fc5-746f7221d231> rdf:type owl:NamedIndividual ,
+                                                                                  :InterpretiveObservation ;
+                                                                         <http://www.w3.org/ns/prov#wasDerivedFrom> <http://www.semanticweb.org/int_r1/0f6af344-86b4-4a5c-ba8e-c41f3dba6b81> ;
+                                                                         rdfs:comment "L'analisi dello Statuto della Famiglia degli Artisti Padovani suggerisce un forte interesse per la valorizzazione dell'arte come componente della vita civile e per il ruolo dell'artigianato. Lo statuto promuove esplicitamente l'integrazione delle opere d'arte nelle costruzioni pubbliche e private, comprese quelle industriali. Questo contesto culturale suggerisce che l'ambiente in cui opera Mansutti non contrapponga necessariamente modernizzazione e arte figurativa, rendendo plausibile l'integrazione di elementi artistici, come gli affreschi del Primo Palazzo IRE, anche all'interno di un progetto edilizio industrializzato."@it ,
+                                                                                      """OLD COMMENT TRAMITE CUI VERIFICARE QUELLI NUOVI
+rdfs:label \"sembra
+ci sia un interesse e una forte sensibilità nella valorizzazione non solo
+dell’arte per la società (valore civile dell’arte), ma anche del lavoro degli
+artigiani da parte della FAP, tanto da divenire carattere fisico/concreto di un
+edificio, venendo quindi concretamente tradotta sia verbalmente nell’esplicita
+volontà di integrare elementi artistici sulle costruzioni della città anche
+industriali e nel linguaggio architettonico tramite la realizzazione degli
+affreschi o elementi artistici di carattere artigianale come nel caso del primo
+Palazzo IRE. L'ambiente culturale in cui opera Mansutti non sembra contrapporre
+automaticamente modernizzazione e arte figurativa. \"@it ."""@it ,
+                                                                                      "The analysis of the Statute of the Padovan Artistic Family (FAP) suggests a strong interest in promoting art as a civic value and in recognising the role of craftsmanship. The statute explicitly encourages the integration of works of art into public, private and industrial buildings. This cultural context suggests that the environment in which Mansutti operated did not necessarily regard modernisation and figurative art as mutually exclusive, making the incorporation of artistic elements, such as the frescoes of the First IRE Building, plausible within an industrialised architectural project."@en ;
+                                                                         rdfs:label "La FAP sembra promuovere l'integrazione dell'arte nell'architettura, anche industriale"@it ,
+                                                                                    "The FAP appears to promote the integration of art into architecture, including industrial buildings"@en .
+
+
+###  http://www.semanticweb.org/int_r1/863db4cb-2fb4-4d69-be93-3d86ed8593d3
+<http://www.semanticweb.org/int_r1/863db4cb-2fb4-4d69-be93-3d86ed8593d3> rdf:type owl:NamedIndividual ,
+                                                                                  :Interpreter ;
+                                                                         rdfs:label "Interpreter_1"@en .
+
+
+###  http://www.semanticweb.org/int_r1/9bf9c22f-7dab-4e9c-9d36-77b7688e01c9
+<http://www.semanticweb.org/int_r1/9bf9c22f-7dab-4e9c-9d36-77b7688e01c9> rdf:type owl:NamedIndividual ,
+                                                                                  :FocalInterpretiveObject ;
+                                                                         :wasInterpretedBy <http://www.semanticweb.org/int_r1/69051ecd-9197-417e-9f26-a1070d174b28> ;
+                                                                         rdfs:label "The First and Second IRE Buildings and the I.R.E. company"@en .
+
+
+###  http://www.semanticweb.org/int_r1/9c5e2b18-4a97-4c22-808c-6a8af0cefea0
+<http://www.semanticweb.org/int_r1/9c5e2b18-4a97-4c22-808c-6a8af0cefea0> rdf:type owl:NamedIndividual ,
+                                                                                  :InterpretiveProcess ;
+                                                                         :hadInterpreter <http://www.semanticweb.org/int_r1/863db4cb-2fb4-4d69-be93-3d86ed8593d3> ;
+                                                                         :interpreted :fd3c40b1-0c49-4a67-8925-c4243c8df5cd ;
+                                                                         :produced <http://www.semanticweb.org/int_r1/2b8e14c9-8f25-4674-988f-9e58416bff1c> ,
+                                                                                   <http://www.semanticweb.org/int_r1/3728443a-e29d-4990-9efd-60fdfc45bdf4> ,
+                                                                                   <http://www.semanticweb.org/int_r1/5a5c969b-ad7f-466f-a643-71b81e2d7803> ,
+                                                                                   <http://www.semanticweb.org/int_r1/619b9f46-3471-43e1-a301-c1a950521dfa> ,
+                                                                                   <http://www.semanticweb.org/int_r1/63aaf702-c16f-476f-9884-afa6a5c4d831> ,
+                                                                                   <http://www.semanticweb.org/int_r1/681d5e6a-bbcc-40fc-98ef-d18b4767ac76> ,
+                                                                                   :b8bf9e40-6511-4e00-a050-c93fda412800 ;
+                                                                         <http://www.w3.org/ns/prov#wasInfluencedBy> <http://www.semanticweb.org/int_r1/66310e30-0c27-4e6f-8af6-50259a651dcb> ,
+                                                                                                                     <http://www.semanticweb.org/int_r1/8a564405-613b-4db1-8738-e5eb057f44c9> ;
+                                                                         <http://www.w3.org/ns/prov#wasStartedBy> <http://www.semanticweb.org/int_r1/1547e3b2-c0de-4e84-bdb0-f10ee9edda55> ;
+                                                                         rdfs:label "Interpretive process of Interpreter 1 regarding the frescoes of the First IRE Building"@en ,
+                                                                                    "Processo interpretativo dell'interprete 1 in relazione agli affreschi del primo palazzo IRE"@it .
+
+
+###  http://www.semanticweb.org/int_r1/9f335147-30f6-4bba-8832-7bb46b8bf8ac
+<http://www.semanticweb.org/int_r1/9f335147-30f6-4bba-8832-7bb46b8bf8ac> rdf:type owl:NamedIndividual ,
+                                                                                  :InterpretiveSubprocess ;
+                                                                         :produced <http://www.semanticweb.org/int_r1/0f6af344-86b4-4a5c-ba8e-c41f3dba6b81> ,
+                                                                                   <http://www.semanticweb.org/int_r1/2b8e14c9-8f25-4674-988f-9e58416bff1c> ,
+                                                                                   <http://www.semanticweb.org/int_r1/20835984-a28b-4930-bfe9-ecd6a554e9f6> ,
+                                                                                   <http://www.semanticweb.org/int_r1/619b9f46-3471-43e1-a301-c1a950521dfa> ;
+                                                                         <http://www.w3.org/ns/prov#wasDerivedFrom> <http://www.semanticweb.org/int_r1/5a5c969b-ad7f-466f-a643-71b81e2d7803> ;
+                                                                         <http://www.w3.org/ns/prov#wasStartedBy> <http://www.semanticweb.org/int_r1/1547e3b2-c0de-4e84-bdb0-f10ee9edda55> ,
+                                                                                                                  <http://www.semanticweb.org/int_r1/5a5c969b-ad7f-466f-a643-71b81e2d7803> ;
+                                                                         rdfs:comment "Interpretative subprocess aimed at examining the apparent inconsistency between the industrialized conception of the first IRE building and the presence of traditional frescoes, through the exploration of additional historical sources."@en ,
+                                                                                      "Sottoprocesso interpretativo mirato a esaminare l'apparente incoerenza tra la concezione industrializzata del primo edificio IRE e la presenza di affreschi tradizionali, attraverso l'esplorazione di fonti storiche aggiuntive."@it ;
+                                                                         rdfs:label "Interpretive subprocess triggered by the anomaly of  the presence of frescoes in the First IRE Building"@en ,
+                                                                                    "Sottoprocesso interpretativo innescato dall'anomalia della presenza di affreschi nel primo edificio dell'IRE."@it .
+
+
+###  http://www.semanticweb.org/int_r1/9f85f436-643f-4d63-8449-3fb170ea9a3d
+<http://www.semanticweb.org/int_r1/9f85f436-643f-4d63-8449-3fb170ea9a3d> rdf:type owl:NamedIndividual ,
+                                                                                  :InterpretiveQuestion ;
+                                                                         rdfs:label "Why do Mansutti and Rossi know each other?"@en .
+
+
+###  http://www.semanticweb.org/int_r1/95b8caf1-af27-4176-bcd8-0b7cf1436891
+<http://www.semanticweb.org/int_r1/95b8caf1-af27-4176-bcd8-0b7cf1436891> rdf:type owl:NamedIndividual ,
+                                                                                  :Evidence ;
+                                                                         :wasProducedBy <http://www.semanticweb.org/int_r1/058a29a1-b5fb-4d68-bd4a-6ba2a9a60171> ;
+                                                                         <http://www.w3.org/ns/prov#wasDerivedFrom> :bddcc92e-2cd2-4373-86aa-d7fd34570274 ;
+                                                                         rdfs:label "Normative and regulatory frameworks encouraging decorative integration in post-war buildings"@en .
+
+
+###  http://www.semanticweb.org/int_r1/978a80b2-0f6f-4e9b-91ea-af87011c2a6e
+<http://www.semanticweb.org/int_r1/978a80b2-0f6f-4e9b-91ea-af87011c2a6e> rdf:type owl:NamedIndividual ,
+                                                                                  :Source ;
+                                                                         rdfs:label "Other post-war buildings in Padua"@en .
+
+
+###  http://www.semanticweb.org/int_r1/a8bdd863-fc65-417e-ba4f-5966d900ce12
+:a8bdd863-fc65-417e-ba4f-5966d900ce12 rdf:type owl:NamedIndividual ,
+                                               <http://www.cidoc-crm.org/cidoc-crm/E24_Physical_Human-Made_Thing> ,
+                                               :Source ;
+                                      rdfs:label "Il primo palazzo IRE"@it ,
+                                                 "The First IRE Building"@en .
+
+
+###  http://www.semanticweb.org/int_r1/aa034ece-b574-413f-8c5f-83af3502c98e
+:aa034ece-b574-413f-8c5f-83af3502c98e rdf:type owl:NamedIndividual ,
+                                               :TemporaryInterpretiveConclusion ;
+                                      <http://www.w3.org/ns/prov#wasDerivedFrom> <http://www.semanticweb.org/int_r1/50494deb-edac-4864-bf69-28ff89c015c3> ;
+                                      rdfs:label "Frescoes as intentional conceptual symbolic cultural elements reflecting the integration of art, architecture and industrialization"@en .
+
+
+###  http://www.semanticweb.org/int_r1/ab7daaf1-fff2-4cb8-af57-0d2c0d6e941a
+:ab7daaf1-fff2-4cb8-af57-0d2c0d6e941a rdf:type owl:NamedIndividual ,
+                                               <http://www.w3.org/ns/prov#Agent> ;
+                                      rdfs:label "Interpreter_2"@en .
+
+
+###  http://www.semanticweb.org/int_r1/b21d45b2-208a-4480-a966-4edc31ed03a2
+:b21d45b2-208a-4480-a966-4edc31ed03a2 rdf:type owl:NamedIndividual ,
+                                               :Source ;
+                                      <http://purl.org/dc/terms/identifier> "man_-mio_0001_0001_0046_0014_0021"@it ;
+                                      rdfs:label "ProMemoria per il Sign. Sindaco e la Spett. Giunta Comunale di Padova"@it .
+
+
+###  http://www.semanticweb.org/int_r1/b85dcd02-75cc-463f-89a5-0a8adcd08179
+:b85dcd02-75cc-463f-89a5-0a8adcd08179 rdf:type owl:NamedIndividual ,
+                                               :InterpretiveProcess ;
+                                      :hadInterpreter <http://www.semanticweb.org/int_r1/863db4cb-2fb4-4d69-be93-3d86ed8593d3> ;
+                                      :includedActivity :f19575d7-5c24-4e15-aaca-2596d7b756fa ;
+                                      :produced <http://www.semanticweb.org/int_r1/6400d3ac-7c71-4c87-8e62-d871918c83d4> ;
+                                      <http://www.w3.org/ns/prov#wasStartedBy> <http://www.semanticweb.org/int_r1/9f85f436-643f-4d63-8449-3fb170ea9a3d> ;
+                                      rdfs:comment "Il precedente processo interpretativo si è concentrato sugli scritti di Mansutti riguardanti il ​​concetto di Ricostruzione. L'analisi ha preso in considerazione anche la nozione di \"Unificazione\" di Carlo Rossi, Presidente dell'UNI, distinta dalla standardizzazione, e l'ha interpretata come una possibile similitudine con il concetto di Ricostruzione Totale di Mansutti."@it ,
+                                                   "The previous interpretative process focused on Mansutti's writings regarding the concept of Reconstruction. The analysis also considered UNI President Carlo Rossi's notion of \"Unification,\" as distinct from standardization, and interpreted it as a possible similarity to Mansutti's concept of Total Reconstruction."@en ;
+                                      rdfs:label "Interpretive process of Interpreter 1 on Mansutti's concept of Reconstruction"@en ,
+                                                 "Processo interpretativo dell'interprete 1 sul concetto di Ricostruzione di Mansutti"@it .
+
+
+###  http://www.semanticweb.org/int_r1/b8bf9e40-6511-4e00-a050-c93fda412800
+:b8bf9e40-6511-4e00-a050-c93fda412800 rdf:type owl:NamedIndividual ,
+                                               :Hypothesis ;
+                                      <http://www.w3.org/ns/prov#wasDerivedFrom> <http://www.semanticweb.org/int_r1/63aaf702-c16f-476f-9884-afa6a5c4d831> ;
+                                      :HypothesisStatus "Not sufficiently supported"@en ;
+                                      rdfs:comment "Hypothesis suggesting that Mansutti may have adopted Padua's historic monuments as iconographic or cultural references to integrate modern architecture into the historic urban fabric."@en ,
+                                                   "Ipotesi secondo cui Mansutti potrebbe aver assunto i monumenti storici di Padova come riferimenti iconografici o culturali per integrare un'architettura moderna nel tessuto storico."@it ;
+                                      rdfs:label "Mansutti's use of Padua's historic monuments as cultural references"@en ,
+                                                 "Utilizzo da parte di Mansutti dei monumenti storici di Padova come riferimenti culturali"@it .
+
+
+###  http://www.semanticweb.org/int_r1/bddcc92e-2cd2-4373-86aa-d7fd34570274
+:bddcc92e-2cd2-4373-86aa-d7fd34570274 rdf:type owl:NamedIndividual ,
+                                               :Source ;
+                                      rdfs:label "Normative and regulatory frameworks"@en .
+
+
+###  http://www.semanticweb.org/int_r1/c2935f91-bd85-44cf-8116-43a3df1a3baf
+:c2935f91-bd85-44cf-8116-43a3df1a3baf rdf:type owl:NamedIndividual ,
+                                               :InterpretiveObservation ;
+                                      :wasProducedBy <http://www.semanticweb.org/int_r1/5e066aac-571a-4023-b163-7649f63805b3> ;
+                                      <http://www.w3.org/ns/prov#wasInfluencedBy> <http://www.semanticweb.org/int_r1/762cc2cf-1a22-4658-95b8-fbaa3b31dd9a> ;
+                                      rdfs:comment "These frescoes are noteworthy"@en ;
+                                      rdfs:label "Questi affreschi sono degni di nota"@it .
+
+
+###  http://www.semanticweb.org/int_r1/c73487d9-a31a-48d9-81aa-cd7e95a69f27
+:c73487d9-a31a-48d9-81aa-cd7e95a69f27 rdf:type owl:NamedIndividual ,
+                                               :Evidence ;
+                                      :wasProducedBy <http://www.semanticweb.org/int_r1/9f335147-30f6-4bba-8832-7bb46b8bf8ac> ;
+                                      <http://www.w3.org/ns/prov#wasDerivedFrom> <http://www.semanticweb.org/int_r1/664c904d-4745-4a5f-a519-e7493f7c962f> ;
+                                      rdfs:label "Padova 19 febbraio 1946 Si è costituita in questi giorni la 'FAMIGLIA ARTISTICA PADOVANA' composta di artisti e amatori dell'arte"@it ,
+                                                 "Padua, February 19, 1946. The 'PADOVAN ARTISTIC FAMILY', composed of artists and art lovers, was formed in recent days."@en .
+
+
+###  http://www.semanticweb.org/int_r1/cd407ee8-806a-40ea-b066-fd6a3eeed5f3
+:cd407ee8-806a-40ea-b066-fd6a3eeed5f3 rdf:type owl:NamedIndividual ,
+                                               :InterpretiveObservation ;
+                                      <http://www.w3.org/ns/prov#wasDerivedFrom> <http://www.semanticweb.org/int_r1/20835984-a28b-4930-bfe9-ecd6a554e9f6> ;
+                                      rdfs:label "The letter suggests that Mansutti attached particular importance to adopting a broad and forward-looking vision"@en .
+
+
+###  http://www.semanticweb.org/int_r1/d76077bb-16cd-4fe6-b09a-e86f4a731a2a
+:d76077bb-16cd-4fe6-b09a-e86f4a731a2a rdf:type owl:NamedIndividual ,
+                                               :Hypothesis ;
+                                      rdfs:label "The First IRE Building project may have started between late 1946 and early 1947"@en .
+
+
+###  http://www.semanticweb.org/int_r1/d8fd3f30-c19d-4e61-aab1-37d8ac86f140
+:d8fd3f30-c19d-4e61-aab1-37d8ac86f140 rdf:type owl:NamedIndividual ,
+                                               :InterpretiveObservation ;
+                                      <http://www.w3.org/ns/prov#wasDerivedFrom> <http://www.semanticweb.org/int_r1/6c3c01bf-4969-4812-a004-79b6c869215f> ;
+                                      rdfs:label "Presence of both Antonio Morato and Ivone Grassetto within the FAP organization"@en .
+
+
+###  http://www.semanticweb.org/int_r1/db1b4a27-dfe4-4a01-9cd0-c97fc5dddecf
+:db1b4a27-dfe4-4a01-9cd0-c97fc5dddecf rdf:type owl:NamedIndividual ,
+                                               <http://www.w3.org/ns/prov#Agent> ;
+                                      rdfs:label "Interpreter_3"@en .
+
+
+###  http://www.semanticweb.org/int_r1/dddbd11c-7c3a-481a-b15b-7bc452281de8
+:dddbd11c-7c3a-481a-b15b-7bc452281de8 rdf:type owl:NamedIndividual ,
+                                               :Source ;
+                                      rdfs:label "Unidentified source"@en .
+
+
+###  http://www.semanticweb.org/int_r1/e36278f2-a289-4e60-b36c-54b9f336e629
+:e36278f2-a289-4e60-b36c-54b9f336e629 rdf:type owl:NamedIndividual ,
+                                               :ChronologicalVerificationActivity ;
+                                      :interpreted :c73487d9-a31a-48d9-81aa-cd7e95a69f27 ,
+                                                   :d76077bb-16cd-4fe6-b09a-e86f4a731a2a ;
+                                      :produced :f886bac8-426e-47c1-ae08-51bbaa6000e5 ;
+                                      rdfs:comment "Comparison between the establishment date of the Padovan Artistic Family (FAP) and the chronology of the First IRE Building project to determine whether the FAP was established before or after the beginning of the architectural project."@en ,
+                                                   "Confronto tra la data di costituzione della Famiglia Artistica Padovana (FAP) e la cronologia del progetto del primo Palazzo IRE, per verificare se la FAP precedesse o seguisse l'avvio del progetto architettonico"@it ;
+                                      rdfs:label "Chronological comparison between the FAP establishment and the First IRE Building Project Timeline"@en ,
+                                                 "Confronto cronologico tra la costituzione della Famiglia Artistica Padovana (FAP) e la cronologia del progetto del primo Palazzo IRE."@it .
+
+
+###  http://www.semanticweb.org/int_r1/f19575d7-5c24-4e15-aaca-2596d7b756fa
+:f19575d7-5c24-4e15-aaca-2596d7b756fa rdf:type owl:NamedIndividual ,
+                                               :CloseReadingActivity ;
+                                      :produced <http://www.semanticweb.org/int_r1/7ce09639-1227-4ac9-a141-01b1c15f38f0> ;
+                                      rdfs:label "Close Reading of Carlo Rossi's Book"@en .
+
+
+###  http://www.semanticweb.org/int_r1/f35fe473-bcc3-4a82-870c-b4fd5f980c86
+:f35fe473-bcc3-4a82-870c-b4fd5f980c86 rdf:type owl:NamedIndividual ,
+                                               <http://www.cidoc-crm.org/cidoc-crm/E74_Group> ;
+                                      rdfs:label "Società I.R.E. (Impresa Ricostruzione Edilizia)"@it ,
+                                                 "The I.R.E. Company"@en .
+
+
+###  http://www.semanticweb.org/int_r1/f886bac8-426e-47c1-ae08-51bbaa6000e5
+:f886bac8-426e-47c1-ae08-51bbaa6000e5 rdf:type owl:NamedIndividual ,
+                                               :InterpretiveObservation ;
+                                      <http://www.w3.org/ns/prov#wasDerivedFrom> :c73487d9-a31a-48d9-81aa-cd7e95a69f27 ,
+                                                                                 :d76077bb-16cd-4fe6-b09a-e86f4a731a2a ;
+                                      rdfs:label "The activities of the FAP appear to precede and overlap with the First IRE Building project."@en .
+
+
+###  http://www.semanticweb.org/int_r1/fd3c40b1-0c49-4a67-8925-c4243c8df5cd
+:fd3c40b1-0c49-4a67-8925-c4243c8df5cd rdf:type owl:NamedIndividual ,
+                                               <http://www.cidoc-crm.org/cidoc-crm/E24_Physical_Human-Made_Thing> ,
+                                               :FocalInterpretiveObject ;
+                                      rdfs:label "Gli affreschi del primo palazzo IRE"@it ,
+                                                 "The frescoes of the First IRE Building"@en .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
