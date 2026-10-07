@@ -18,8 +18,8 @@ Instead, it aims to make explicit epistemically distinguishable and documentable
 elements of historical inquiry, their provenance, and their relationships across 
 multiple interpretive processes.
 
-The ontology is based on PROV-O and specializes its core classes prov:Agent, prov:Activity, 
-and prov:Entity to represent interpreters, interpretive processes and activities, sources 
+The ontology is based on PROV-O and specializes its core classes `prov:Agent`, `prov:Activity`, 
+and `prov:Entity` to represent interpreters, interpretive processes and activities, sources 
 and focal objects of inquiry, and the interpretive products that emerge throughout the inquiry.
 
 ## Motivation
