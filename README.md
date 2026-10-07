@@ -44,6 +44,8 @@ The ontology distinguishes three main dimensions of historical inquiry:
 - **Interpretive activities** — the processes, subprocesses, and activities through which historical inquiry develops.
 - **Interpretive entities and products** — the objects, sources, evidence, observations, questions, hypotheses, and temporary conclusions involved in or generated through interpretation.
 
+<img width="788" height="902" alt="Figure3" src="https://github.com/user-attachments/assets/3942e273-8333-4399-b87b-5257f6f0eea7" />
+
 The main classes include:
 
 - `at:Interpreter`
