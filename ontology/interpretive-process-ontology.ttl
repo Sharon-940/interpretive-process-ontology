@@ -1,15 +1,15 @@
-@prefix : <http://www.semanticweb.org/int_r1/> .
+@prefix : <http://www.semanticweb.org/interpretive-process-ontology/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://www.semanticweb.org/int_r1/> .
+@base <http://www.semanticweb.org/interpretive-process-ontology/> .
 
-<http://www.semanticweb.org/int_r1> rdf:type owl:Ontology ;
-                                     rdfs:comment "\"Interpretive Process Ontology\" is designed to represent the interpretive processes through which interpreters construct an interpretation, taking into account its evolutionary nature. Rather than representing only the final outcomes of interpretation, the ontology allows to model the dynamic process through which meaning is progressively constructed, including the identification of anomalies that trigger sensemaking, the collection of fragmentary clues (evidence), the formulation of observations, questions, hypotheses, temporary conclusions, and the branching evolution of multiple interpretive processes."@en ,
-                                                  "L\"Ontologia del Processo Interpretativo\" è stata concepita per rappresentare i processi interpretativi attraverso i quali gli interpreti costruiscono un'interpretazione, tenendo conto della sua natura evolutiva. Piuttosto che rappresentare solo i risultati finali dell'interpretazione, l'ontologia permette di modellare il processo dinamico attraverso il quale il significato viene progressivamente costruito, includendo l'identificazione di anomalie che innescano la costruzione di significato, la raccolta di indizi frammentari (evidenze), la formulazione di osservazioni, domande, ipotesi, conclusioni provvisorie e l'evoluzione ramificata di molteplici processi interpretativi."@it ;
-                                     rdfs:label "Interpretive Process Ontology"@en .
+<http://www.semanticweb.org/interpretive-process-ontology/> rdf:type owl:Ontology ;
+                                                             rdfs:comment "\"Interpretive Process Ontology\" is designed to represent the interpretive processes through which interpreters construct an interpretation, taking into account its evolutionary nature. Rather than representing only the final outcomes of interpretation, the ontology allows to model the dynamic process through which meaning is progressively constructed, including the identification of anomalies that trigger sensemaking, the collection of fragmentary clues (evidence), the formulation of observations, questions, hypotheses, temporary conclusions, and the branching evolution of multiple interpretive processes."@en ,
+                                                                          "L\"Ontologia del Processo Interpretativo\" è stata concepita per rappresentare i processi interpretativi attraverso i quali gli interpreti costruiscono un'interpretazione, tenendo conto della sua natura evolutiva. Piuttosto che rappresentare solo i risultati finali dell'interpretazione, l'ontologia permette di modellare il processo dinamico attraverso il quale il significato viene progressivamente costruito, includendo l'identificazione di anomalie che innescano la costruzione di significato, la raccolta di indizi frammentari (evidenze), la formulazione di osservazioni, domande, ipotesi, conclusioni provvisorie e l'evoluzione ramificata di molteplici processi interpretativi."@it ;
+                                                             rdfs:label "Interpretive Process Ontology"@en .
 
 #################################################################
 #    Annotation properties
@@ -23,7 +23,15 @@
 #    Object Properties
 #################################################################
 
-###  http://www.semanticweb.org/int_r1/hadInterpreter
+###  http://www.semanticweb.org/interpretive-process-ontology/adopted
+:adopted rdf:type owl:ObjectProperty ;
+         rdfs:domain :InterpretiveProcess ,
+                     :InterpretiveSubprocess ;
+         rdfs:range :InterpretiveProcessProduct ;
+         rdfs:comment "controllare se ci sono relazioni già esistenti in CRMinf"@it .
+
+
+###  http://www.semanticweb.org/interpretive-process-ontology/hadInterpreter
 :hadInterpreter rdf:type owl:ObjectProperty ;
                 rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasAssociatedWith> ;
                 owl:inverseOf :wasInterpreterOf ;
@@ -31,7 +39,7 @@
                 rdfs:range :Interpreter .
 
 
-###  http://www.semanticweb.org/int_r1/hadInterpretiveInterest
+###  http://www.semanticweb.org/interpretive-process-ontology/hadInterpretiveInterest
 :hadInterpretiveInterest rdf:type owl:ObjectProperty ;
                          rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasInfluencedBy> ;
                          owl:inverseOf :wasInterpretiveInterestOf ;
@@ -39,12 +47,12 @@
                          rdfs:range :InterpretiveTopicOfInterest .
 
 
-###  http://www.semanticweb.org/int_r1/included
+###  http://www.semanticweb.org/interpretive-process-ontology/included
 :included rdf:type owl:ObjectProperty ;
           owl:inverseOf :wasIncluded .
 
 
-###  http://www.semanticweb.org/int_r1/includedActivity
+###  http://www.semanticweb.org/interpretive-process-ontology/includedActivity
 :includedActivity rdf:type owl:ObjectProperty ;
                   rdfs:subPropertyOf :included ;
                   owl:inverseOf :wasActivityOf ;
@@ -53,7 +61,7 @@
                   rdfs:range :InterpretiveActivity .
 
 
-###  http://www.semanticweb.org/int_r1/includedSubprocess
+###  http://www.semanticweb.org/interpretive-process-ontology/includedSubprocess
 :includedSubprocess rdf:type owl:ObjectProperty ;
                     rdfs:subPropertyOf :included ;
                     owl:inverseOf :wasSubprocessOf ;
@@ -61,7 +69,7 @@
                     rdfs:range :InterpretiveSubprocess .
 
 
-###  http://www.semanticweb.org/int_r1/interpreted
+###  http://www.semanticweb.org/interpretive-process-ontology/interpreted
 :interpreted rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf <http://www.w3.org/ns/prov#used> ;
              owl:inverseOf :wasInterpretedBy ;
@@ -71,7 +79,7 @@
                           "Relates an interpretive activity, which is an interpretive process, to the entity that constitutes its object of interpretation. The interpreted entity may be either a source or an interpretive product (e.g., an interpretive observation or a temporary interpretive conclusion) generated by another historian during a previous interpretive process."@en .
 
 
-###  http://www.semanticweb.org/int_r1/produced
+###  http://www.semanticweb.org/interpretive-process-ontology/produced
 :produced rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf <http://www.w3.org/ns/prov#generated> ;
           owl:inverseOf :wasProducedBy ;
@@ -81,40 +89,40 @@
           rdfs:range :InterpretiveProcessProduct .
 
 
-###  http://www.semanticweb.org/int_r1/wasActivityOf
+###  http://www.semanticweb.org/interpretive-process-ontology/wasActivityOf
 :wasActivityOf rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf :wasIncluded .
 
 
-###  http://www.semanticweb.org/int_r1/wasIncluded
+###  http://www.semanticweb.org/interpretive-process-ontology/wasIncluded
 :wasIncluded rdf:type owl:ObjectProperty .
 
 
-###  http://www.semanticweb.org/int_r1/wasInterpretedBy
+###  http://www.semanticweb.org/interpretive-process-ontology/wasInterpretedBy
 :wasInterpretedBy rdf:type owl:ObjectProperty ;
                   rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasUsedBy> ;
                   rdfs:domain :InterpretiveEntity ;
                   rdfs:range :InterpretiveProcess .
 
 
-###  http://www.semanticweb.org/int_r1/wasInterpreterOf
+###  http://www.semanticweb.org/interpretive-process-ontology/wasInterpreterOf
 :wasInterpreterOf rdf:type owl:ObjectProperty ;
                   rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasAssociatedFor> .
 
 
-###  http://www.semanticweb.org/int_r1/wasInterpretiveInterestOf
+###  http://www.semanticweb.org/interpretive-process-ontology/wasInterpretiveInterestOf
 :wasInterpretiveInterestOf rdf:type owl:ObjectProperty ;
                            rdfs:subPropertyOf <http://www.w3.org/ns/prov#influenced> ;
                            rdfs:domain :InterpretiveTopicOfInterest ;
                            rdfs:range :Interpreter .
 
 
-###  http://www.semanticweb.org/int_r1/wasProducedBy
+###  http://www.semanticweb.org/interpretive-process-ontology/wasProducedBy
 :wasProducedBy rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasGeneratedBy> .
 
 
-###  http://www.semanticweb.org/int_r1/wasSubprocessOf
+###  http://www.semanticweb.org/interpretive-process-ontology/wasSubprocessOf
 :wasSubprocessOf rdf:type owl:ObjectProperty ;
                  rdfs:subPropertyOf :wasIncluded .
 
@@ -210,7 +218,7 @@
 #    Data properties
 #################################################################
 
-###  http://www.semanticweb.org/int_r1/HypothesisStatus
+###  http://www.semanticweb.org/interpretive-process-ontology/HypothesisStatus
 :HypothesisStatus rdf:type owl:DatatypeProperty ;
                   rdfs:domain :Hypothesis ;
                   rdfs:range rdfs:Literal .
@@ -255,7 +263,7 @@
                                                                       rdfs:subClassOf <http://www.cidoc-crm.org/extensions/crmtex/TX1_Written_Text> .
 
 
-###  http://www.semanticweb.org/int_r1/Anomaly
+###  http://www.semanticweb.org/interpretive-process-ontology/Anomaly
 :Anomaly rdf:type owl:Class ;
          rdfs:subClassOf :InterpretiveObservation ;
          rdfs:comment "An interpretive observation representing an element perceived by an interpreter as unexpected or inconsistent with their background knowledge, expectations, or the current interpretive context."@en ,
@@ -264,7 +272,7 @@
                     "Anomaly"@en .
 
 
-###  http://www.semanticweb.org/int_r1/ChronologicalVerificationActivity
+###  http://www.semanticweb.org/interpretive-process-ontology/ChronologicalVerificationActivity
 :ChronologicalVerificationActivity rdf:type owl:Class ;
                                    rdfs:subClassOf :InterpretiveActivity ;
                                    rdfs:comment "An interpretive activity consisting of the comparison of dates or chronological sequences in order to identify temporal relationships relevant to the ongoing interpretive process."@en ,
@@ -273,7 +281,7 @@
                                               "Chronological Verification Activity"@en .
 
 
-###  http://www.semanticweb.org/int_r1/CloseReadingActivity
+###  http://www.semanticweb.org/interpretive-process-ontology/CloseReadingActivity
 :CloseReadingActivity rdf:type owl:Class ;
                       rdfs:subClassOf :InterpretiveActivity ;
                       rdfs:comment "An interpretive activity consisting of the detailed examination of one or more interpretive sources or other interpretive objects in order to identify relevant information for the ongoing interpretive process."@en ,
@@ -282,7 +290,7 @@
                                  "Close Reading Activity"@en .
 
 
-###  http://www.semanticweb.org/int_r1/CorrelationActivity
+###  http://www.semanticweb.org/interpretive-process-ontology/CorrelationActivity
 :CorrelationActivity rdf:type owl:Class ;
                      rdfs:subClassOf :InterpretiveActivity ;
                      rdfs:comment "An interpretive activity consisting of the comparison and correlation of two or more interpretive objects or interpretive products in order to identify meaningful relationships relevant to the ongoing interpretive process."@en ,
@@ -291,16 +299,16 @@
                                 "Correlation Activity"@en .
 
 
-###  http://www.semanticweb.org/int_r1/Evidence
+###  http://www.semanticweb.org/interpretive-process-ontology/Evidence
 :Evidence rdf:type owl:Class ;
           rdfs:subClassOf :InterpretiveProcessProduct ;
-          rdfs:comment "An interpretive process product representing an element intentionally identified by an interpreter as relevant within one or more sources for the interpretive process being carried out. Unlike a textual fragment or another source segment, an evidence is already the result of an initial interpretive selection rather than a simple extraction from the source. It may emerge from the interpretation and synthesis of one or more textual passages, one or more sources, or both. An evidence represents a clue considered meaningful for the ongoing interpretive process and may subsequently support the formulation, revision, or evaluation of observations, questions, hypotheses, and temporary conclusions. It is therefore not intended as scientific proof, but as a clue in the sense proposed by Carlo Ginzburg."@en ,
-                       "Un prodotto del processo interpretativo che rappresenta un elemento intenzionalmente individuato da un interprete come rilevante all'interno di una o più fonti per il processo interpretativo in corso. A differenza di un frammento testuale o di un altro segmento della fonte, un'evidenza è già il risultato di una prima selezione interpretativa e non una semplice estrazione dalla fonte. Può emergere dall'interpretazione e dalla sintesi di uno o più passaggi testuali, di una o più fonti, oppure dalla loro combinazione. L'evidenza rappresenta un indizio ritenuto significativo per il processo interpretativo in corso e può successivamente contribuire alla formulazione, revisione o valutazione di osservazioni, domande interpretative, ipotesi e conclusioni provvisorie. Non costituisce quindi una prova scientifica, bensì un indizio nel senso proposto da Carlo Ginzburg."@it ;
+          rdfs:comment "An interpretive process product representing an element intentionally identified by an interpreter as relevant within one or more sources for the interpretive process being carried out. Unlike a textual fragment or another source segment, an evidence is already the result of an initial interpretive selection rather than a simple extraction from the source. It may emerge from the interpretation and synthesis of one or more textual passages, one or more sources, or both. An evidence represents a clue considered meaningful for the ongoing interpretive process and may be used to support or test a hypothesis, as well as to support the formulation, revision, or evaluation of observations, questions, hypotheses, and temporary conclusions. It is therefore not intended as scientific proof, but as a clue in the sense proposed by Carlo Ginzburg."@en ,
+                       "Un prodotto del processo interpretativo che rappresenta un elemento intenzionalmente individuato da un interprete come rilevante all'interno di una o più fonti per il processo interpretativo in corso. A differenza di un frammento testuale o di un altro segmento della fonte, un'evidenza è già il risultato di una prima selezione interpretativa e non una semplice estrazione dalla fonte. Può emergere dall'interpretazione e dalla sintesi di uno o più passaggi testuali, di una o più fonti, oppure dalla loro combinazione. Un'evidenza rappresenta un indizio considerato significativo per il processo interpretativo in corso e può essere impiegata per sostenere o mettere alla prova un'ipotesi, nonché per supportare la formulazione, la revisione o la valutazione di osservazioni, domande, ipotesi e conclusioni temporanee. Non costituisce quindi una prova scientifica, bensì un indizio nel senso proposto da Carlo Ginzburg."@it ;
           rdfs:label "Evidence"@en ,
                      "Evidenza"@it .
 
 
-###  http://www.semanticweb.org/int_r1/FocalInterpretiveObject
+###  http://www.semanticweb.org/interpretive-process-ontology/FocalInterpretiveObject
 :FocalInterpretiveObject rdf:type owl:Class ;
                          rdfs:subClassOf :InterpretiveObject ;
                          rdfs:comment "L'oggetto principale di un processo interpretativo, che lo motiva e ne costituisce il fulcro. Rappresenta il fenomeno, l'artefatto, il concetto, l'evento o qualsiasi altra entità la cui interpretazione guida l'intero processo interpretativo."@it ,
@@ -309,7 +317,7 @@
                                     "Oggetto interpretativo principale"@it .
 
 
-###  http://www.semanticweb.org/int_r1/Hypothesis
+###  http://www.semanticweb.org/interpretive-process-ontology/Hypothesis
 :Hypothesis rdf:type owl:Class ;
             rdfs:subClassOf :InterpretiveProcessProduct ;
             rdfs:comment "An interpretive process product representing a tentative explanation or proposition formulated by an interpreter to explain, relate, or predict one or more interpretive observations or other interpretive products."@en ,
@@ -318,7 +326,7 @@
                        "Ipotesi"@it .
 
 
-###  http://www.semanticweb.org/int_r1/Interpreter
+###  http://www.semanticweb.org/interpretive-process-ontology/Interpreter
 :Interpreter rdf:type owl:Class ;
              rdfs:subClassOf <http://www.w3.org/ns/prov#Agent> ;
              rdfs:comment "An agent who carries out one or more interpretive processes concerning one or more interpretive objects, producing, revising, or reusing interpretive products such as evidence, observations, questions, and others."@en ,
@@ -327,7 +335,7 @@
                         "Interpreter"@en .
 
 
-###  http://www.semanticweb.org/int_r1/InterpretiveActivity
+###  http://www.semanticweb.org/interpretive-process-ontology/InterpretiveActivity
 :InterpretiveActivity rdf:type owl:Class ;
                       rdfs:subClassOf <http://www.w3.org/ns/prov#Activity> ;
                       rdfs:comment "A specific and distinguishable activity carried out by an interpreter within an interpretive process or an interpretive inquiry activity."@en ,
@@ -336,7 +344,7 @@
                                  "Interpretive Activity"@en .
 
 
-###  http://www.semanticweb.org/int_r1/InterpretiveEntity
+###  http://www.semanticweb.org/interpretive-process-ontology/InterpretiveEntity
 :InterpretiveEntity rdf:type owl:Class ;
                     rdfs:subClassOf <http://www.w3.org/ns/prov#Entity> ;
                     rdfs:comment "A superclass representing any entity involved in an interpretive process, either as something being interpreted or as a product generated by an interpretive process."@en ,
@@ -345,7 +353,7 @@
                                "Interpretive Entity"@en .
 
 
-###  http://www.semanticweb.org/int_r1/InterpretiveObject
+###  http://www.semanticweb.org/interpretive-process-ontology/InterpretiveObject
 :InterpretiveObject rdf:type owl:Class ;
                     rdfs:subClassOf :InterpretiveEntity ;
                     rdfs:comment "An entity interpreted during an interpretive process. It may represent either the primary object of interpretation or a source interpreted to investigate that object."@en ,
@@ -354,7 +362,7 @@
                     rdfs:label "Interpretive Object"@en .
 
 
-###  http://www.semanticweb.org/int_r1/InterpretiveObservation
+###  http://www.semanticweb.org/interpretive-process-ontology/InterpretiveObservation
 :InterpretiveObservation rdf:type owl:Class ;
                          rdfs:subClassOf :InterpretiveProcessProduct ;
                          rdfs:comment "An interpretive process product representing an observation produced by an interpreter. Unlike observations in the scientific sense, interpretive observations are inherently influenced by the interpreter's background knowledge, perspective, and interpretive context."@en ,
@@ -363,7 +371,7 @@
                                     "Osservazione interpretativa"@it .
 
 
-###  http://www.semanticweb.org/int_r1/InterpretiveProcess
+###  http://www.semanticweb.org/interpretive-process-ontology/InterpretiveProcess
 :InterpretiveProcess rdf:type owl:Class ;
                      rdfs:subClassOf <http://www.w3.org/ns/prov#Activity> ;
                      rdfs:comment "An activity representing the overall interpretive process carried out by an interpreter in relation to one or more focal interpretive objects. It may include interpretive activities and interpretive inquiry activities and may produce, revise, or reuse interpretive products."@en ,
@@ -372,7 +380,7 @@
                                 "Processo interpretativo"@it .
 
 
-###  http://www.semanticweb.org/int_r1/InterpretiveProcessProduct
+###  http://www.semanticweb.org/interpretive-process-ontology/InterpretiveProcessProduct
 :InterpretiveProcessProduct rdf:type owl:Class ;
                             rdfs:subClassOf :InterpretiveEntity ;
                             rdfs:comment "An entity produced during an interpretive process. Interpretive process products may serve as input for subsequent interpretive activities or new interpretive processes."@it ,
@@ -381,12 +389,12 @@
                                        "Prodotto del processo interpretativo"@it .
 
 
-###  http://www.semanticweb.org/int_r1/InterpretiveQuestion
+###  http://www.semanticweb.org/interpretive-process-ontology/InterpretiveQuestion
 :InterpretiveQuestion rdf:type owl:Class ;
                       rdfs:subClassOf :InterpretiveProcessProduct .
 
 
-###  http://www.semanticweb.org/int_r1/InterpretiveSubprocess
+###  http://www.semanticweb.org/interpretive-process-ontology/InterpretiveSubprocess
 :InterpretiveSubprocess rdf:type owl:Class ;
                         rdfs:subClassOf <http://www.w3.org/ns/prov#Activity> ;
                         rdfs:comment "An interpretive subprocess forming part of a broader interpretive process. It groups multiple interpretive activities contributing to the exploration of one or more interpretive products whose internal sequence cannot always be clearly distinguished or fully represented."@en ,
@@ -395,7 +403,7 @@
                                    "Sottoprocesso interpretativo"@it .
 
 
-###  http://www.semanticweb.org/int_r1/InterpretiveTopicOfInterest
+###  http://www.semanticweb.org/interpretive-process-ontology/InterpretiveTopicOfInterest
 :InterpretiveTopicOfInterest rdf:type owl:Class ;
                              rdfs:subClassOf :InterpretiveEntity ;
                              rdfs:comment "A concept that represents a topic of interest to the interpreter."@en ,
@@ -404,7 +412,7 @@
                                         "Tema interpretativo di interesse"@it .
 
 
-###  http://www.semanticweb.org/int_r1/Source
+###  http://www.semanticweb.org/interpretive-process-ontology/Source
 :Source rdf:type owl:Class ;
         rdfs:subClassOf :InterpretiveObject ;
         rdfs:comment "An interpretive object interpreted during an interpretive process to investigate a focal interpretive object."@en ,
@@ -413,7 +421,7 @@
                    "Source"@en .
 
 
-###  http://www.semanticweb.org/int_r1/TemporaryInterpretiveConclusion
+###  http://www.semanticweb.org/interpretive-process-ontology/TemporaryInterpretiveConclusion
 :TemporaryInterpretiveConclusion rdf:type owl:Class ;
                                  rdfs:subClassOf :InterpretiveProcessProduct ;
                                  rdfs:comment "An interpretive process product representing the explanation or the hypothesis currently considered the most plausible on the basis of the available interpretive products. It may be revised, replaced, or reused in subsequent interpretive activities or processes."@en ,
