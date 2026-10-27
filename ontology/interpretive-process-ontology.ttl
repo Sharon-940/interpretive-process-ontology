@@ -19,6 +19,10 @@
 <http://purl.org/dc/terms/identifier> rdf:type owl:AnnotationProperty .
 
 
+###  http://purl.org/vocab/vann/usageNote
+<http://purl.org/vocab/vann/usageNote> rdf:type owl:AnnotationProperty .
+
+
 #################################################################
 #    Object Properties
 #################################################################
@@ -28,7 +32,18 @@
          rdfs:domain :InterpretiveProcess ,
                      :InterpretiveSubprocess ;
          rdfs:range :InterpretiveProcessProduct ;
-         rdfs:comment "controllare se ci sono relazioni già esistenti in CRMinf"@it .
+         rdfs:seeAlso """CRMinf: I7 Belief Adoption, J6 adopted
+CiTO: agreesWith, usesConclusionOf, supports, extends.
+
+Il concetto di adozione è correlato, sul piano concettuale, a «I7 Belief Adoption» (adozione di una credenza) e «J6 adopted» (adottato) di CRMinf. Tuttavia, la proprietà «adopted» qui proposta opera a un diverso livello di granularità: essa mette in relazione un processo interpretativo con il prodotto di un precedente processo interpretativo, il quale viene incorporato nel quadro interpretativo del primo, senza che ciò implichi necessariamente l'adozione di uno specifico valore di credenza relativo a un insieme di proposizioni.
+
+CiTO sta caratterizzando principalmente la funzione o l'intento della relazione citazionale tra entità bibliografiche, consentendo, ad esempio, di indicare che un lavoro agrees with, uses conclusions from, supports o extends un altro lavoro. Queste proprietà possono descrivere il modo in cui un contributo si relaziona intellettualmente a un contributo precedente, ma non rappresentano l'incorporazione di uno specifico prodotto interpretativo precedente nello sviluppo interno di un nuovo processo interpretativo. adopted, invece, collega esplicitamente un InterpretiveProcess o InterpretiveSubprocess a un precedente InterpretiveProcessProduct che viene assunto come parte del proprio quadro interpretativo."""@it ,
+                      """CRMinf: I7 Belief Adoption, J6 adopted
+CiTO: agreesWith, usesConclusionOf, supports, extends.
+
+The notion of adoption is conceptually related to CRMinf's I7 Belief Adoption and J6 adopted. However, the proposed adopted property operates at a different level of granularity, relating an interpretive process to a previous interpretive process product incorporated into its interpretive framework, without necessarily representing the adoption of a specific belief value concerning a proposition set.
+
+CiTO primarily characterizes the function or intent of citation relations between bibliographic entities, allowing, for example, one to indicate that a work agrees with, uses conclusions from, supports, or extends another work. These properties can describe how a contribution intellectually relates to a previous contribution, but they do not represent the incorporation of a specific previous interpretive product into the internal development of a new interpretive process. adopted, instead, explicitly relates an InterpretiveProcess or InterpretiveSubprocess to a previous InterpretiveProcessProduct that is adopted as part of its own interpretive framework."""@en .
 
 
 ###  http://www.semanticweb.org/interpretive-process-ontology/hadInterpreter
@@ -36,7 +51,11 @@
                 rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasAssociatedWith> ;
                 owl:inverseOf :wasInterpreterOf ;
                 rdfs:domain :InterpretiveProcess ;
-                rdfs:range :Interpreter .
+                rdfs:range :Interpreter ;
+                rdfs:comment "Mette in relazione un processo interpretativo con l'interprete responsabile del suo svolgimento."@it ,
+                             "Relates an interpretive process to the interpreter responsible for carrying it out."@en ;
+                rdfs:label "ha come interprete"@it ,
+                           "had interpreter"@en .
 
 
 ###  http://www.semanticweb.org/interpretive-process-ontology/hadInterpretiveInterest
@@ -44,12 +63,20 @@
                          rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasInfluencedBy> ;
                          owl:inverseOf :wasInterpretiveInterestOf ;
                          rdfs:domain :Interpreter ;
-                         rdfs:range :InterpretiveTopicOfInterest .
+                         rdfs:range :InterpretiveTopicOfInterest ;
+                         rdfs:comment "Mette in relazione un interprete con un tema di interesse che può orientare o influenzare la sua attività interpretativa."@it ,
+                                      "Relates an interpreter to a topic of interest that may orient or influence their interpretive activity."@en ;
+                         rdfs:label "ha come interesse interpretativo"@it ,
+                                    "had interpretive interest"@en .
 
 
 ###  http://www.semanticweb.org/interpretive-process-ontology/included
 :included rdf:type owl:ObjectProperty ;
-          owl:inverseOf :wasIncluded .
+          owl:inverseOf :wasIncluded ;
+          rdfs:comment "Mette in relazione un processo o sottoprocesso interpretativo con una componente in esso inclusa."@it ,
+                       "Relates an interpretive process or subprocess to a component included within it."@en ;
+          rdfs:label "included"@en ,
+                     "includeva"@it .
 
 
 ###  http://www.semanticweb.org/interpretive-process-ontology/includedActivity
@@ -58,7 +85,11 @@
                   owl:inverseOf :wasActivityOf ;
                   rdfs:domain :InterpretiveProcess ,
                               :InterpretiveSubprocess ;
-                  rdfs:range :InterpretiveActivity .
+                  rdfs:range :InterpretiveActivity ;
+                  rdfs:comment "Mette in relazione un processo o sottoprocesso interpretativo con un'attività interpretativa in esso inclusa."@it ,
+                               "Relates an interpretive process or subprocess to an interpretive activity included within it."@en ;
+                  rdfs:label "included activity"@en ,
+                             "includeva l'attività"@it .
 
 
 ###  http://www.semanticweb.org/interpretive-process-ontology/includedSubprocess
@@ -66,17 +97,23 @@
                     rdfs:subPropertyOf :included ;
                     owl:inverseOf :wasSubprocessOf ;
                     rdfs:domain :InterpretiveProcess ;
-                    rdfs:range :InterpretiveSubprocess .
+                    rdfs:range :InterpretiveSubprocess ;
+                    rdfs:comment "Mette in relazione un processo interpretativo con un sottoprocesso interpretativo in esso contenuto."@it ,
+                                 "Relates an interpretive process to an interpretive subprocess included within it."@en ;
+                    rdfs:label "included subprocess"@en ,
+                               "includeva il sottoprocesso"@it .
 
 
 ###  http://www.semanticweb.org/interpretive-process-ontology/interpreted
 :interpreted rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf <http://www.w3.org/ns/prov#used> ;
              owl:inverseOf :wasInterpretedBy ;
-             rdfs:domain :InterpretiveProcess ;
+             rdfs:domain :InterpretiveActivity ,
+                         :InterpretiveProcess ,
+                         :InterpretiveSubprocess ;
              rdfs:range :InterpretiveEntity ;
-             rdfs:comment "Mette in relazione un'attività interpretativa che è essa stessa una forma di processo interpretativo, con l'entità che ne costituisce l'oggetto di interpretazione. L'entità interpretata può essere una fonte o un prodotto interpretativo (ad esempio, un'osservazione interpretativa o una conclusione interpretativa temporanea) generato anche da un altro storico durante un precedente processo interpretativo."@it ,
-                          "Relates an interpretive activity, which is an interpretive process, to the entity that constitutes its object of interpretation. The interpreted entity may be either a source or an interpretive product (e.g., an interpretive observation or a temporary interpretive conclusion) generated by another historian during a previous interpretive process."@en .
+             rdfs:comment "Mette in relazione un processo, un sottoprocesso o un'attività di interpretazione con un'entità che viene interpretata al suo interno. L'entità interpretata può essere un oggetto di interpretazione, appartenente alla classe 'FocalInterpretiveObject', oppure un prodotto di un processo interpretativo (ad esempio, un'osservazione interpretativa o una conclusione interpretativa provvisoria) generato nel corso dello stesso o di un altro processo di interpretazione."@it ,
+                          "Relates an interpretive process, subprocess, or activity to an entity interpreted within it. The interpreted entity may be an interpretive object, belonging to the 'FocalInterpretiveObject' class, or an interpretive process product  (e.g., an interpretive observation or a temporary interpretive conclusion) generated during the same or another interpretive process."@en .
 
 
 ###  http://www.semanticweb.org/interpretive-process-ontology/produced
@@ -86,16 +123,28 @@
           rdfs:domain :InterpretiveActivity ,
                       :InterpretiveProcess ,
                       :InterpretiveSubprocess ;
-          rdfs:range :InterpretiveProcessProduct .
+          rdfs:range :InterpretiveProcessProduct ;
+          rdfs:comment "Mette in relazione un processo, sottoprocesso o attività di interpretazione con un suo prodotto, appartenente alla classe 'InterpretiveProcessProduct', generato attraverso di esso."@it ,
+                       "Relates an interpretive process, subprocess, or activity to one of its products, belonging to the 'InterpretiveProcessProduct' class, generated through it."@en ;
+          rdfs:label "ha prodotto"@it ,
+                     "produced"@en .
 
 
 ###  http://www.semanticweb.org/interpretive-process-ontology/wasActivityOf
 :wasActivityOf rdf:type owl:ObjectProperty ;
-               rdfs:subPropertyOf :wasIncluded .
+               rdfs:subPropertyOf :wasIncluded ;
+               rdfs:comment "Mette in relazione un'attività interpretativa con il processo o sottoprocesso interpretativo di cui essa fa parte."@it ,
+                            "Relates an interpretive activity to the interpretive process or subprocess of which it forms part."@en ;
+               rdfs:label "era attività di"@it ,
+                          "was activity of"@en .
 
 
 ###  http://www.semanticweb.org/interpretive-process-ontology/wasIncluded
-:wasIncluded rdf:type owl:ObjectProperty .
+:wasIncluded rdf:type owl:ObjectProperty ;
+             rdfs:comment "Mette in relazione un componente con il processo o sottoprocesso interpretativo in cui è inserito."@it ,
+                          "Relates a component to the interpretive process or subprocess in which it is included."@en ;
+             rdfs:label "era incluso in"@it ,
+                        "was included"@en .
 
 
 ###  http://www.semanticweb.org/interpretive-process-ontology/wasInterpretedBy
@@ -107,24 +156,46 @@
 
 ###  http://www.semanticweb.org/interpretive-process-ontology/wasInterpreterOf
 :wasInterpreterOf rdf:type owl:ObjectProperty ;
-                  rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasAssociatedFor> .
+                  rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasAssociateFor> ;
+                  rdfs:domain :Interpreter ;
+                  rdfs:range :InterpretiveProcess ;
+                  rdfs:comment "Relates an interpreter to an interpretive process carried out by that interpreter."@en ,
+                               "was interpreter of"@en ;
+                  rdfs:label "Mette in relazione un interprete con un processo interpretativo svolto dall'interprete stesso."@it ,
+                             "interprete di"@it .
 
 
 ###  http://www.semanticweb.org/interpretive-process-ontology/wasInterpretiveInterestOf
 :wasInterpretiveInterestOf rdf:type owl:ObjectProperty ;
                            rdfs:subPropertyOf <http://www.w3.org/ns/prov#influenced> ;
                            rdfs:domain :InterpretiveTopicOfInterest ;
-                           rdfs:range :Interpreter .
+                           rdfs:range :Interpreter ;
+                           rdfs:comment "Mette in relazione un tema interpretativo di interesse con un interprete, la cui attività interpretativa potrebbe esserne orientata o influenzata."@it ,
+                                        "Relates an interpretive topic of interest to an interpreter whose interpretive activity it may orient or influence."@en ;
+                           rdfs:label "interesse interpretativo di"@it ,
+                                      "was interpretive interest of"@en .
 
 
 ###  http://www.semanticweb.org/interpretive-process-ontology/wasProducedBy
 :wasProducedBy rdf:type owl:ObjectProperty ;
-               rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasGeneratedBy> .
+               rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasGeneratedBy> ;
+               rdfs:domain :InterpretiveProcessProduct ;
+               rdfs:range :InterpretiveActivity ,
+                          :InterpretiveProcess ,
+                          :InterpretiveSubprocess ;
+               rdfs:comment "Mette in relazione un prodotto del processo interpretativo con il processo, sottoprocesso o attività interpretativa attraverso cui è stato generato."@it ,
+                            "Relates an interpretive process product to the interpretive process, subprocess, or activity through which it was generated."@en ;
+               rdfs:label "was produced by"@en ,
+                          "è stato prodotto da"@it .
 
 
 ###  http://www.semanticweb.org/interpretive-process-ontology/wasSubprocessOf
 :wasSubprocessOf rdf:type owl:ObjectProperty ;
-                 rdfs:subPropertyOf :wasIncluded .
+                 rdfs:subPropertyOf :wasIncluded ;
+                 rdfs:comment "Mette in relazione un sottoprocesso interpretativo con il più ampio processo interpretativo di cui fa parte."@it ,
+                              "Relates an interpretive subprocess to the broader interpretive process of which it forms part."@en ;
+                 rdfs:label "era sottoprocesso di"@it ,
+                            "was subprocess of"@en .
 
 
 ###  http://www.w3.org/ns/prov#Started
@@ -164,13 +235,15 @@
                                               "Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity."@en .
 
 
-###  http://www.w3.org/ns/prov#wasAssociatedFor
-<http://www.w3.org/ns/prov#wasAssociatedFor> rdf:type owl:ObjectProperty ;
-                                             owl:inverseOf <http://www.w3.org/ns/prov#wasAssociatedWith> .
+###  http://www.w3.org/ns/prov#wasAssociateFor
+<http://www.w3.org/ns/prov#wasAssociateFor> rdf:type owl:ObjectProperty ;
+                                            rdfs:subPropertyOf <http://www.w3.org/ns/prov#influenced> ;
+                                            owl:inverseOf <http://www.w3.org/ns/prov#wasAssociatedWith> .
 
 
 ###  http://www.w3.org/ns/prov#wasAssociatedWith
 <http://www.w3.org/ns/prov#wasAssociatedWith> rdf:type owl:ObjectProperty ;
+                                              rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasInfluencedBy> ;
                                               rdfs:domain <http://www.w3.org/ns/prov#Activity> ;
                                               rdfs:range <http://www.w3.org/ns/prov#Agent> .
 
@@ -197,7 +270,8 @@
                                             rdfs:range <http://www.w3.org/ns/prov#Activity> ,
                                                        <http://www.w3.org/ns/prov#Agent> ,
                                                        <http://www.w3.org/ns/prov#Entity> ;
-                                            rdfs:comment "proprietà che lega un diversi processi interpretativi che si influenzano generati anche dalla stessa persona. Quando uno storico ha prodotto una ricerca quindi un processo interpretativo e genera a partire da questo processo un altro processo interpretativo che anche su oggetti di ricerca sensibilmente diversi. I presupposti di tale nuovo processo interpretativo sono influenzati da quello vecchio (dalle conclusioni)."@it .
+                                            <http://purl.org/vocab/vann/usageNote> "In the Interpretive Process Ontology, this property may be used to represent the influence of a previous interpretive process or interpretive product on another interpretive process."@en ,
+                                                                                   "Nell'Interpretive Process Ontology, questa proprietà può essere utilizzata per rappresentare l'influenza di un precedente processo o prodotto interpretativo su un altro processo interpretativo."@it .
 
 
 ###  http://www.w3.org/ns/prov#wasStartedBy
@@ -248,9 +322,7 @@
 
 
 ###  http://www.cidoc-crm.org/cidoc-crm/I2_Belief
-<http://www.cidoc-crm.org/cidoc-crm/I2_Belief> rdf:type owl:Class ;
-                                               owl:equivalentClass :TemporaryInterpretiveConclusion ;
-                                               rdfs:subClassOf :InterpretiveProcessProduct .
+<http://www.cidoc-crm.org/cidoc-crm/I2_Belief> rdf:type owl:Class .
 
 
 ###  http://www.cidoc-crm.org/extensions/crmtex/TX1_Written_Text
@@ -357,9 +429,9 @@
 :InterpretiveObject rdf:type owl:Class ;
                     rdfs:subClassOf :InterpretiveEntity ;
                     rdfs:comment "An entity interpreted during an interpretive process. It may represent either the primary object of interpretation or a source interpreted to investigate that object."@en ,
-                                 "Entità interpretata durante un processo interpretativo. Può rappresentare sia l'oggetto principale dell'interpretazione sia una fonte interpretata per approfondirlo."@it ,
-                                 "Oggetto interpretativo"@it ;
-                    rdfs:label "Interpretive Object"@en .
+                                 "Entità interpretata durante un processo interpretativo. Può rappresentare sia l'oggetto principale dell'interpretazione sia una fonte interpretata per approfondirlo."@it ;
+                    rdfs:label "Interpretive Object"@en ,
+                               "Oggetto interpretativo"@it .
 
 
 ###  http://www.semanticweb.org/interpretive-process-ontology/InterpretiveObservation
@@ -383,7 +455,7 @@
 ###  http://www.semanticweb.org/interpretive-process-ontology/InterpretiveProcessProduct
 :InterpretiveProcessProduct rdf:type owl:Class ;
                             rdfs:subClassOf :InterpretiveEntity ;
-                            rdfs:comment "An entity produced during an interpretive process. Interpretive process products may serve as input for subsequent interpretive activities or new interpretive processes."@it ,
+                            rdfs:comment "An entity produced during an interpretive process. Interpretive process products may serve as input for subsequent interpretive activities or new interpretive processes."@en ,
                                          "Entità prodotta durante un processo interpretativo. I prodotti del processo interpretativo possono costituire l'input di successive attività interpretative o di nuovi processi interpretativi."@it ;
                             rdfs:label "Interpretive Process Product"@en ,
                                        "Prodotto del processo interpretativo"@it .
@@ -391,7 +463,11 @@
 
 ###  http://www.semanticweb.org/interpretive-process-ontology/InterpretiveQuestion
 :InterpretiveQuestion rdf:type owl:Class ;
-                      rdfs:subClassOf :InterpretiveProcessProduct .
+                      rdfs:subClassOf :InterpretiveProcessProduct ;
+                      rdfs:comment "An interpretive process product representing a question formulated during an interpretive process that identifies an aspect requiring further investigation and may orient subsequent interpretive activities or the production of other interpretive process products, such as hypotheses. Interpretive questions may be reformulated as the inquiry develops and may orient the interpretive process toward new directions of investigation."@en ,
+                                   "Un prodotto del processo interpretativo che rappresenta una domanda formulata durante un processo interpretativo, attraverso la quale viene individuato un aspetto che richiede ulteriori approfondimenti e che può orientare successive attività interpretative o la produzione di altri prodotti del processo interpretativo, come le ipotesi. Le domande interpretative possono essere riformulate con lo sviluppo dell'indagine e possono orientare il processo interpretativo verso nuove direzioni di ricerca."@it ;
+                      rdfs:label "Domanda interpretativa"@it ,
+                                 "Interpretive Question"@en .
 
 
 ###  http://www.semanticweb.org/interpretive-process-ontology/InterpretiveSubprocess
@@ -424,9 +500,9 @@
 ###  http://www.semanticweb.org/interpretive-process-ontology/TemporaryInterpretiveConclusion
 :TemporaryInterpretiveConclusion rdf:type owl:Class ;
                                  rdfs:subClassOf :InterpretiveProcessProduct ;
-                                 rdfs:comment "An interpretive process product representing the explanation or the hypothesis currently considered the most plausible on the basis of the available interpretive products. It may be revised, replaced, or reused in subsequent interpretive activities or processes."@en ,
-                                              "Un prodotto del processo interpretativo che rappresenta la spiegazione o l'ipotesi ritenuta, allo stato attuale, la più plausibile sulla base dei prodotti interpretativi disponibili. Può essere revisionata, sostituita o riutilizzata in successive attività o processi interpretativi."@it ;
-                                 rdfs:label "Conclusione interpretativa provvisoria"@it ,
+                                 rdfs:comment "A \"Temporary Interpretive Conclusion\" represents a provisional product of an interpretive process. Its propositional content could be further decomposed into propositions and represented through CRMinf constructs such as I4 Proposition Set, while I2 Belief could be used to represent an interpreter's epistemic position toward such propositions."@en ,
+                                              "Una “Conclusione interpretativa temporanea” rappresenta il risultato provvisorio di un processo interpretativo. Il suo contenuto proposizionale potrebbe essere ulteriormente scomposto in proposizioni e rappresentato tramite costrutti CRMinf quali l’“I4 Proposition Set”, mentre l’“I2 Belief” potrebbe essere utilizzato per rappresentare la posizione epistemica di un interprete nei confronti di tali proposizioni."@it ;
+                                 rdfs:label "Conclusione interpretativa temporanea"@it ,
                                             "Temporary Interpretive Conclusion"@en .
 
 
