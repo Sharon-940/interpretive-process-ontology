@@ -264,12 +264,6 @@ CiTO primarily characterizes the function or intent of citation relations betwee
 
 ###  http://www.w3.org/ns/prov#wasInfluencedBy
 <http://www.w3.org/ns/prov#wasInfluencedBy> rdf:type owl:ObjectProperty ;
-                                            rdfs:domain <http://www.w3.org/ns/prov#Activity> ,
-                                                        <http://www.w3.org/ns/prov#Agent> ,
-                                                        <http://www.w3.org/ns/prov#Entity> ;
-                                            rdfs:range <http://www.w3.org/ns/prov#Activity> ,
-                                                       <http://www.w3.org/ns/prov#Agent> ,
-                                                       <http://www.w3.org/ns/prov#Entity> ;
                                             <http://purl.org/vocab/vann/usageNote> "In the Interpretive Process Ontology, this property may be used to represent the influence of a previous interpretive process or interpretive product on another interpretive process."@en ,
                                                                                    "Nell'Interpretive Process Ontology, questa proprietà può essere utilizzata per rappresentare l'influenza di un precedente processo o prodotto interpretativo su un altro processo interpretativo."@it .
 
